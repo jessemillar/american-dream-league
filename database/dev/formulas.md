@@ -24,3 +24,17 @@ totalBases/atBats
 ```
 onBasePercentage + sluggingPercentage
 ```
+
+## Earned-Run Average
+
+```
+Earned-Runs allowed/9 innings
+```
+
+## WHIP
+
+```
+Walks + Hits / innings pitched
+```
+
+
