@@ -1,0 +1,1 @@
+SP, RP, 1B, 2B, 3B, SS, C, CF, RF, LF
