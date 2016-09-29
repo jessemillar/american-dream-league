@@ -1,0 +1,117 @@
+League(leagueID, name)
+  User(userID, email [emailID], password [passwordID], standing)
+    Email(emailID, screenname, domain)
+    Password(passwordID, hash)
+  Friendship(friendshipID, user [userID], user [userID])
+  Team(teamID, mascot [mascotID], logo [logoID], name, ownerName)
+    Mascot(mascotID, name)
+    Logo(logoID, file)
+    Pitcher(pitcherID, saves, innings, WHIP, ERA, player [playerID])
+    Batter(batterID, onBasePercent, battingAverage, strikeOuts, slugPercent, player [playerID], hit [hitID], atBat [atBatID])
+      Hit(hitID, singles, doubles, triples, homeRuns)
+      AtBat(atBatID, count)
+    Player(playerID, age, gameCount, wins, name [nameID], position [positionID])
+      Name(nameID, firstName, middleName, lastName)
+      Position(positionID, positionName)
+
+
+League(
+  leagueID,
+  name
+)
+
+User(
+  userID,
+  email [emailID],
+  password [passwordID],
+  standing
+)
+
+Email(
+  emailID,
+  screenname,
+  domain
+)
+
+Password(
+  passwordID,
+  hash
+)
+
+Friendship(
+  friendshipID,
+  user [userID],
+  user [userID]
+)
+
+Team(
+  teamID,
+  mascot [mascotID],
+  logo [logoID],
+  name,
+  ownerName
+)
+
+Mascot(
+  mascotID,
+  name
+)
+
+Logo(
+  logoID,
+  file
+)
+
+Pitcher(
+  pitcherID,
+  saves,
+  innings,
+  WHIP,
+  ERA,
+  player [playerID]
+)
+
+Batter(
+  batterID,
+  onBasePercent,
+  battingAverage,
+  strikeOuts,
+  slugPercent,
+  player [playerID],
+  hit [hitID],
+  atBat [atBatID]
+)
+
+Hit(
+  hitID,
+  singles,
+  doubles,
+  triples,
+  homeRuns
+)
+
+AtBat(
+  atBatID,
+  count
+)
+
+Player(
+  playerID,
+  age,
+  gameCount,
+  wins,
+  name [nameID],
+  position [positionID]
+)
+
+Name(
+  nameID,
+  firstName,
+  middleName,
+  lastName
+)
+
+Position(
+  positionID,
+  positionName
+)
