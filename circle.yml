@@ -1,0 +1,14 @@
+machine:
+  services:
+    - docker
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - docker build -t jessemillar/american-dream-league:$CIRCLE_SHA1 .
+      - docker build -t jessemillar/american-dream-league:latest .
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - docker push jessemillar/american-dream-league:$CIRCLE_SHA1
+      - docker push jessemillar/american-dream-league:latest
+      - ./deploy.sh
