@@ -1,0 +1,12 @@
+american-dream-league:
+    build: .
+    ports:
+        - "8000:8000"
+    links:
+        - mysql
+mysql:
+    image: mysql:latest
+    environment:
+        - MYSQL_ROOT_PASSWORD=password
+    ports:
+        - "3306:3306"
