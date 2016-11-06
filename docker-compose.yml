@@ -4,6 +4,12 @@ american-dream-league:
         - 8000:8000
     links:
         - mysql
+    environment:
+        - DATABASE_USERNAME=root
+        - DATABASE_PASSWORD=password
+        - DATABASE_HOST=mysql # Use Docker hostname linking
+        - DATABASE_PORT=3306
+        - DATABASE_NAME=american_dream_league # Database is created by ./database/database.sql
 mysql:
     build: ./database
     environment:

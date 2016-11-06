@@ -8,7 +8,7 @@ type League struct {
 // GetLeagueByName returns a league from the database by name
 func (accessorGroup *AccessorGroup) GetLeagueByName(name string) (League, error) {
 	league := &League{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM League WHERE name=?", name).Scan(&league.ID, &league.Email)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM League WHERE name=?", name).Scan(&league.ID, &league.Name)
 
 	if err != nil {
 		return League{}, err
@@ -17,10 +17,10 @@ func (accessorGroup *AccessorGroup) GetLeagueByName(name string) (League, error)
 	return *league, nil
 }
 
-// GetLeagueByID returns a league from the database by leagueID
-func (accessorGroup *AccessorGroup) GetLeagueByID(name string) (League, error) {
+// GetLeagueById returns a league from the database by leagueID
+func (accessorGroup *AccessorGroup) GetLeagueById(name string) (League, error) {
 	league := &League{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM League WHERE leagueID=?", name).Scan(&league.ID, &league.Email)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM League WHERE leagueID=?", name).Scan(&league.ID, &league.Name)
 
 	if err != nil {
 		return League{}, err
@@ -31,7 +31,7 @@ func (accessorGroup *AccessorGroup) GetLeagueByID(name string) (League, error) {
 
 // GetLeagueID returns a leagueID from the database from a name
 func (accessorGroup *AccessorGroup) GetLeagueID(name string) (int, error) {
-	league, err := accessorGroup.GetLeagueByEmail(name)
+	league, err := accessorGroup.GetLeagueByName(name)
 	if err != nil {
 		return 0, err
 	}
@@ -46,7 +46,7 @@ func (accessorGroup *AccessorGroup) MakeLeague(name string) (League, error) {
 		return League{}, err
 	}
 
-	league, err := accessorGroup.GetLeagueByEmail(name)
+	league, err := accessorGroup.GetLeagueByName(name)
 	if err != nil {
 		return League{}, err
 	}
