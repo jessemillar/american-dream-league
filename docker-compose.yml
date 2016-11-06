@@ -5,11 +5,8 @@ american-dream-league:
     links:
         - mysql
 mysql:
-    image: mysql:latest
+    build: ./database
     environment:
         - MYSQL_ROOT_PASSWORD=password
-        - MYSQL_DATABASE=american_dream_league
     ports:
         - 3306:3306
-    volumes:
-        - ./database:/docker-entrypoint-initdb.d
