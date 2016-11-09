@@ -22,11 +22,11 @@ CREATE TABLE Logo(logoID int(5), file varchar(25));
 
 CREATE TABLE Pitcher(pitcherID int(5), saves int(5), innings int(5), WHIP int(5), ERA int(5), player int(5));
 
-CREATE TABLE Batter(batterID int(5), onBasePercent int(5), battingAverage int(5), strikeOuts int(5), slugPercent int(5), player int(5), hit int(5), atBat int(5))
+CREATE TABLE Batter(batterID int(5), onBasePercent int(5), battingAverage int(5), strikeOuts int(5), slugPercent int(5), player int(5), hit int(5), atBat int(5));
 
-CREATE TABLE Hit(hitID int(5), singles int(5), doubles int(5), triples int(5), homeRuns int(5))
+CREATE TABLE Hit(hitID int(5), singles int(5), doubles int(5), triples int(5), homeRuns int(5));
 
-CREATE TABLE AtBat(atBatID int(5), count int(5))
+CREATE TABLE AtBat(atBatID int(5), count int(5));
 
 CREATE TABLE Player(playerID int(5),age int(5), gameCount int(5), wins int(5), name int(5), position int(5));
 
