@@ -13,4 +13,4 @@ RUN go install -v
 
 CMD ["/go/bin/american-dream-league"]
 
-EXPOSE 8000
+EXPOSE 9999

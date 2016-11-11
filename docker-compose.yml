@@ -1,7 +1,7 @@
 american-dream-league:
     build: .
     ports:
-        - 8000:8000
+        - 9999:9999
     links:
         - mysql
     environment:
