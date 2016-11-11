@@ -23,13 +23,14 @@ func main() {
 	handlerGroup := new(handlers.HandlerGroup)
 	handlerGroup.Accessors = accessorGroup
 
-	port := ":8000"
+	port := ":9999"
 	router := echo.New()
 	router.Pre(middleware.RemoveTrailingSlash())
 
 	router.Get("/health", health.Check)
 
 	router.Get("/api/generate/hitter", handlerGroup.GenerateHitter)
+	router.Get("/api/generate/pitcher", handlerGroup.GeneratePitcher)
 	router.Get("/api/league/id/:id", handlerGroup.GetLeagueById)
 
 	log.Println("American Dream League is listening on " + port)

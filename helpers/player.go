@@ -42,3 +42,23 @@ func GenerateHitter() (Hitter, error) {
 
 	return hitter, nil
 }
+
+func GeneratePitcher() (Pitcher, error) {
+	rando := rand.New(rand.NewSource(time.Now().UnixNano())) // Instantiate the random number generator with a seed
+
+	pitcher := Pitcher{}
+
+	name, err := GetName()
+	if err != nil {
+		return Pitcher{}, err
+	}
+
+	pitcher.Name = name
+	pitcher.InningsPitched = rando.Intn(100)
+	pitcher.EarnedRuns = rando.Intn(100)
+	pitcher.Strikeouts = rando.Intn(100)
+	pitcher.Wins = rando.Intn(100)
+	pitcher.EarnedRunAverage = rando.Intn(100)
+
+	return pitcher, nil
+}

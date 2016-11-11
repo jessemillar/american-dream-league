@@ -15,3 +15,12 @@ func (handlerGroup *HandlerGroup) GenerateHitter(context echo.Context) error {
 
 	return context.JSON(http.StatusOK, response)
 }
+
+func (handlerGroup *HandlerGroup) GeneratePitcher(context echo.Context) error {
+	response, err := helpers.GeneratePitcher()
+	if err != nil {
+		return context.String(http.StatusBadRequest, err.Error())
+	}
+
+	return context.JSON(http.StatusOK, response)
+}
