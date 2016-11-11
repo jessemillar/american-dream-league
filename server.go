@@ -29,6 +29,7 @@ func main() {
 
 	router.Get("/health", health.Check)
 
+	router.Get("/api/generate/hitter", handlerGroup.GenerateHitter)
 	router.Get("/api/league/id/:id", handlerGroup.GetLeagueById)
 
 	log.Println("American Dream League is listening on " + port)
