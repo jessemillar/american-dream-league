@@ -37,9 +37,13 @@ func main() {
 
 	router.Get("/health", health.Check)
 
-	router.Get("/api/generate/hitter", handlerGroup.GenerateHitter)
-	router.Get("/api/generate/pitcher", handlerGroup.GeneratePitcher)
-	router.Get("/api/league/id/:id", handlerGroup.GetLeagueById)
+	router.Get("/api/hitter", handlerGroup.GetHitters)
+	router.Get("/api/pitcher", handlerGroup.GetPitchers)
+	// router.Get("/api/players", handlerGroup.GeneratePlayers)
+	// router.Get("/api/league/id/:id", handlerGroup.GetLeagueById)
+
+	router.Put("/api/hitter", handlerGroup.GenerateHitter)
+	router.Put("/api/pitcher", handlerGroup.GeneratePitcher)
 
 	router.Static("/*", "public")
 	router.Get("/", views.Frontend)

@@ -7,6 +7,24 @@ import (
 	"github.com/labstack/echo"
 )
 
+func (handlerGroup *HandlerGroup) GetHitters(context echo.Context) error {
+	response, err := helpers.GetHitters()
+	if err != nil {
+		return context.String(http.StatusBadRequest, err.Error())
+	}
+
+	return context.JSON(http.StatusOK, response)
+}
+
+func (handlerGroup *HandlerGroup) GetPitchers(context echo.Context) error {
+	response, err := helpers.GetPitchers()
+	if err != nil {
+		return context.String(http.StatusBadRequest, err.Error())
+	}
+
+	return context.JSON(http.StatusOK, response)
+}
+
 func (handlerGroup *HandlerGroup) GenerateHitter(context echo.Context) error {
 	response, err := helpers.GenerateHitter()
 	if err != nil {
