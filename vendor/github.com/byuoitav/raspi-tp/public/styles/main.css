@@ -1,0 +1,50 @@
+body,
+html {
+    margin          : 0;
+    padding         : 0;
+    background-color: #404a54;
+    overflow        : hidden;
+    cursor          : none !important;
+}
+
+a,
+button {
+    cursor: none !important;
+}
+
+h1,
+h2,
+h3 {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.version-number {
+    position : absolute;
+    right    : 0;
+    bottom   : 0;
+    color    : #889ba9;
+    font-size: 14px;
+    padding  : 10px;
+}
+
+.padding-above {
+    padding-top: 35px;
+}
+
+.padding-below {
+    padding-bottom: 35px;
+}
+
+.soundboard-button {
+    width           : 90%;
+    height          : 85px;
+    margin-bottom   : 25px;
+    font-weight     : bold;
+    font-size       : 18px;
+    opacity         : 0.8;
+    background-color: #ffffff;
+}
+
+.soundboard-button:hover {
+    background-color: #ffffff;
+}

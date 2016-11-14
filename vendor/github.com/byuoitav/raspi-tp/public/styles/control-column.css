@@ -1,0 +1,40 @@
+#control-column {
+    background-color: #2d353f;
+    height          : 100%;
+    box-shadow      : inset 7px 0 9px -7px rgba(0,0,0,0.4);
+}
+
+#control-column .row {
+    height : 16.666666667%;
+    padding: 0;
+}
+
+#control-column .col-xs-12 {
+    height      : 100%;
+    color       : rgba(255, 255, 255, 0.5);
+    display     : table;
+    table-layout: fixed;
+}
+
+#control-column a {
+    color          : rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+}
+
+#control-column span {
+    font-size     : 18px;
+    font-weight   : bold;
+    letter-spacing: 1px;
+    width         : 100%;
+    text-align    : center;
+    vertical-align: middle;
+    display       : table-cell;
+}
+
+#control-column .glyphicon {
+    font-size: 25px;
+}
+
+#control-column .glyphicon:active {
+    color: #ffffff;
+}
