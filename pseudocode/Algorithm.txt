@@ -1,0 +1,56 @@
+int hits
+int homeruns
+int runs
+double avg
+int wins
+int strikeouts
+double era
+double whip
+
+if (team 1 hits > team 2 hits)
+team 1 score ++
+
+else if team 2 hits > team 1 hits)
+team 2 score ++
+
+if (team 1 homeruns > team 2 homeruns)
+team 1 score ++
+
+else if team 2 homeruns > team 1 homeruns)
+team 2 score ++
+
+if (team 1 avg > team 2 avg)
+team 1 score ++
+
+else if team 2 avg > team 1 avg)
+team 2 score ++
+
+if (team 1 rbi > team 2 rbi)
+team 1 score ++
+
+else if team 2 rbi > team 1 rbi)
+team 2 score ++
+
+if (team 1 strikeouts > team 2 strikeouts)
+team 1 score ++
+
+else if team 2 strikeouts > team 1 strikeouts)
+team 2 score ++
+
+if (team 1 wins > team 2 wins)
+team 1 score ++
+
+else if team 2 wins > team 1 wins)
+team 2 score ++
+
+if (team 1 era > team 2 era)
+team 1 score ++
+
+else if team 2 era > team 1 era)
+team 2 score ++
+
+if (team 1 whip > team 2 whip)
+team 1 score ++
+
+else if team 2 whip > team 1 whip)
+team 2 score ++
