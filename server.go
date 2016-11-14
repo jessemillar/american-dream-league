@@ -27,7 +27,7 @@ func main() {
 	handlerGroup.Accessors = accessorGroup
 
 	templateEngine := &helpers.Template{
-		Templates: template.Must(template.ParseGlob("public/*.html")),
+		Templates: template.Must(template.ParseGlob("public/*/*.html")),
 	}
 
 	port := ":9999"
