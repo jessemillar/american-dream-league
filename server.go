@@ -8,7 +8,7 @@ import (
 	"github.com/byuoitav/raspi-tp/helpers"
 	"github.com/jessemillar/american-dream-league/accessors"
 	"github.com/jessemillar/american-dream-league/handlers"
-	"github.com/jessemillar/byudzhet/views"
+	"github.com/jessemillar/american-dream-league/views"
 	"github.com/jessemillar/health"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/fasthttp"

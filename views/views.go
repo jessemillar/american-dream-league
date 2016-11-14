@@ -7,5 +7,5 @@ import (
 )
 
 func Frontend(context echo.Context) error {
-	return context.Render(http.StatusOK, "frontend")
+	return context.Render(http.StatusOK, "frontend", "")
 }
