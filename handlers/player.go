@@ -8,7 +8,7 @@ import (
 )
 
 func (handlerGroup *HandlerGroup) GetHitters(context echo.Context) error {
-	response, err := helpers.GetHitters()
+	response, err := handlerGroup.Accessors.GetHitters()
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}
@@ -17,7 +17,7 @@ func (handlerGroup *HandlerGroup) GetHitters(context echo.Context) error {
 }
 
 func (handlerGroup *HandlerGroup) GetPitchers(context echo.Context) error {
-	response, err := helpers.GetPitchers()
+	response, err := handlerGroup.Accessors.GetPitchers()
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}

@@ -1,7 +1,8 @@
 package accessors
 
 type Hitter struct {
-	HitterID       int
+	ID             int
+	Name           int
 	OnBasePercent  int
 	BattingAverage int
 	Strikeouts     int
@@ -11,14 +12,26 @@ type Hitter struct {
 	AtBats         int
 }
 
-// GetLeagueByName returns a league from the database by name
-func (accessorGroup *AccessorGroup) GetLeagueByName(name string) (League, error) {
-	league := &League{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM Hitters", name).Scan(&league.ID, &league.Name)
+// GetHitters returns all hitters from the database
+func (accessorGroup *AccessorGroup) GetHitters() (Hitter, error) {
+	hitter := &Hitter{}
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Hitters").Scan(&hitter.ID, &hitter.Name)
 
 	if err != nil {
-		return League{}, err
+		return Hitter{}, err
 	}
 
-	return *league, nil
+	return *hitter, nil
+}
+
+// GetPitchers returns all hitters from the database
+func (accessorGroup *AccessorGroup) GetPitchers() (Hitter, error) {
+	hitter := &Hitter{}
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Pitchers").Scan(&hitter.ID, &hitter.Name)
+
+	if err != nil {
+		return Hitter{}, err
+	}
+
+	return *hitter, nil
 }
