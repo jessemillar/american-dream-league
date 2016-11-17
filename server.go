@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/byuoitav/raspi-tp/helpers"
+	"github.com/jessemillar/american-dream-league/helpers"
 	"github.com/jessemillar/american-dream-league/accessors"
 	"github.com/jessemillar/american-dream-league/handlers"
 	"github.com/jessemillar/american-dream-league/views"
