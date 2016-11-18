@@ -1,6 +1,3 @@
-# american-dream-league
-A fantasy baseball league for a school project
-
 # Setup
 You'll need to have `docker-compose` and `go` installed and functional on your machine before starting. Once those are installed, navigate to the project directory in your terminal and run `docker-compose build && docker-compose up -d`. This will spin up Docker containers and link them based on the project files.
 

@@ -37,6 +37,7 @@ func main() {
 
 	router.Get("/health", health.Check)
 
+	router.Get("/api/league", handlerGroup.GetAllLeagues)
 	router.Get("/api/hitter", handlerGroup.GetHitters)
 	router.Get("/api/pitcher", handlerGroup.GetPitchers)
 	// router.Get("/api/players", handlerGroup.GeneratePlayers)

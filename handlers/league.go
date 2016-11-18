@@ -24,6 +24,15 @@ func (handlerGroup *HandlerGroup) GetLeagueByName(context echo.Context) error {
 	return context.JSON(http.StatusOK, response)
 }
 
+func (handlerGroup *HandlerGroup) GetAllLeagues(context echo.Context) error {
+	response, err := handlerGroup.Accessors.GetAllLeagues()
+	if err != nil {
+		return context.String(http.StatusBadRequest, err.Error())
+	}
+
+	return context.JSON(http.StatusOK, response)
+}
+
 func (handlerGroup *HandlerGroup) MakeLeague(context echo.Context) error {
 	response, err := handlerGroup.Accessors.MakeLeague(context.Param("name"))
 	if err != nil {
