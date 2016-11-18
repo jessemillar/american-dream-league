@@ -7,22 +7,13 @@ import (
 	"github.com/labstack/echo"
 )
 
-func (handlerGroup *HandlerGroup) GetLeagueById(context echo.Context) error {
+func (handlerGroup *HandlerGroup) GetLeagueByID(context echo.Context) error {
 	ID, err := strconv.Atoi(context.Param("id"))
 	if err != nil {
 		return err
 	}
 
-	response, err := handlerGroup.Accessors.GetLeagueById(ID)
-	if err != nil {
-		return context.String(http.StatusBadRequest, err.Error())
-	}
-
-	return context.JSON(http.StatusOK, response)
-}
-
-func (handlerGroup *HandlerGroup) GetLeagueByName(context echo.Context) error {
-	response, err := handlerGroup.Accessors.GetLeagueByName(context.Param("name"))
+	response, err := handlerGroup.Accessors.GetLeagueByID(ID)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}
@@ -64,15 +55,6 @@ func (handlerGroup *HandlerGroup) DeleteLeagueByID(context echo.Context) error {
 	}
 
 	err = handlerGroup.Accessors.DeleteLeagueByID(ID)
-	if err != nil {
-		return context.String(http.StatusBadRequest, err.Error())
-	}
-
-	return context.JSON(http.StatusOK, "")
-}
-
-func (handlerGroup *HandlerGroup) DeleteLeagueByName(context echo.Context) error {
-	err := handlerGroup.Accessors.DeleteLeagueByName(context.Param("name"))
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}

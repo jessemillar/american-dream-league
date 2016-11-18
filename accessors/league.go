@@ -7,10 +7,10 @@ type League struct {
 	Name string `json:"name"`
 }
 
-// GetLeagueByName returns a league from the database by name
-func (accessorGroup *AccessorGroup) GetLeagueByName(name string) (League, error) {
+// GetLeagueByID returns a league from the database by leagueID
+func (accessorGroup *AccessorGroup) GetLeagueByID(ID int) (League, error) {
 	league := &League{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM Leagues WHERE name=?", name).Scan(&league.ID, &league.Name)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Leagues WHERE ID=?", ID).Scan(&league.ID, &league.Name)
 	if err != nil {
 		return League{}, err
 	}
@@ -18,10 +18,10 @@ func (accessorGroup *AccessorGroup) GetLeagueByName(name string) (League, error)
 	return *league, nil
 }
 
-// GetLeagueById returns a league from the database by leagueID
-func (accessorGroup *AccessorGroup) GetLeagueById(ID int) (League, error) {
+// GetLeagueByName returns a league from the database by leagueID
+func (accessorGroup *AccessorGroup) GetLeagueByName(name string) (League, error) {
 	league := &League{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM Leagues WHERE ID=?", ID).Scan(&league.ID, &league.Name)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Leagues WHERE name=?", name).Scan(&league.ID, &league.Name)
 	if err != nil {
 		return League{}, err
 	}
@@ -74,7 +74,7 @@ func (accessorGroup *AccessorGroup) UpdateLeague(context echo.Context) (League, 
 		return League{}, err
 	}
 
-	league, err = accessorGroup.GetLeagueById(league.ID)
+	league, err = accessorGroup.GetLeagueByID(league.ID)
 	if err != nil {
 		return League{}, err
 	}
@@ -106,21 +106,6 @@ func (accessorGroup *AccessorGroup) MakeLeague(context echo.Context) (League, er
 // DeleteLeagueByID deletes a league from the database
 func (accessorGroup *AccessorGroup) DeleteLeagueByID(ID int) error {
 	_, err := accessorGroup.Database.Query("DELETE FROM Leagues WHERE ID=?", ID)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// DeleteLeagueByName deletes a league from the database
-func (accessorGroup *AccessorGroup) DeleteLeagueByName(name string) error {
-	ID, err := accessorGroup.GetLeagueID(name)
-	if err != nil {
-		return err
-	}
-
-	err = accessorGroup.DeleteLeagueByID(ID)
 	if err != nil {
 		return err
 	}

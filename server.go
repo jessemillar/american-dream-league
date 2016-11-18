@@ -38,19 +38,17 @@ func main() {
 	router.Get("/health", health.Check)
 
 	router.Get("/api/league", handlerGroup.GetAllLeagues)
+	router.Get("/api/league/:id", handlerGroup.GetLeagueByID)
+	router.Post("/api/league", handlerGroup.MakeLeague)
+	router.Put("/api/league", handlerGroup.UpdateLeague)
+	router.Delete("/api/league/:id", handlerGroup.DeleteLeagueByID)
+
 	router.Get("/api/hitter", handlerGroup.GetHitters)
 	router.Get("/api/pitcher", handlerGroup.GetPitchers)
 	// router.Get("/api/players", handlerGroup.GeneratePlayers)
-	// router.Get("/api/league/id/:id", handlerGroup.GetLeagueById)
 
-	router.Put("/api/league", handlerGroup.UpdateLeague)
 	router.Put("/api/hitter", handlerGroup.GenerateHitter)
 	router.Put("/api/pitcher", handlerGroup.GeneratePitcher)
-
-	router.Post("/api/league", handlerGroup.MakeLeague)
-
-	router.Delete("/api/league/name/:name", handlerGroup.DeleteLeagueByName)
-	router.Delete("/api/league/id/:id", handlerGroup.DeleteLeagueByID)
 
 	router.Static("/*", "public")
 	router.Get("/", views.Frontend)
