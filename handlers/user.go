@@ -8,13 +8,13 @@ import (
 	"github.com/labstack/echo"
 )
 
-func (handlerGroup *HandlerGroup) GetLeagueByID(context echo.Context) error {
+func (handlerGroup *HandlerGroup) GetUserByID(context echo.Context) error {
 	ID, err := strconv.Atoi(context.Param("id"))
 	if err != nil {
 		return err
 	}
 
-	response, err := handlerGroup.Accessors.GetLeagueByID(ID)
+	response, err := handlerGroup.Accessors.GetUserByID(ID)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}
@@ -22,8 +22,8 @@ func (handlerGroup *HandlerGroup) GetLeagueByID(context echo.Context) error {
 	return context.JSON(http.StatusOK, response)
 }
 
-func (handlerGroup *HandlerGroup) GetAllLeagues(context echo.Context) error {
-	response, err := handlerGroup.Accessors.GetAllLeagues()
+func (handlerGroup *HandlerGroup) GetAllUsers(context echo.Context) error {
+	response, err := handlerGroup.Accessors.GetAllUsers()
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}
@@ -31,8 +31,8 @@ func (handlerGroup *HandlerGroup) GetAllLeagues(context echo.Context) error {
 	return context.JSON(http.StatusOK, response)
 }
 
-func (handlerGroup *HandlerGroup) UpdateLeague(context echo.Context) error {
-	response, err := handlerGroup.Accessors.UpdateLeague(context)
+func (handlerGroup *HandlerGroup) UpdateUser(context echo.Context) error {
+	response, err := handlerGroup.Accessors.UpdateUser(context)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}
@@ -40,8 +40,8 @@ func (handlerGroup *HandlerGroup) UpdateLeague(context echo.Context) error {
 	return context.JSON(http.StatusOK, response)
 }
 
-func (handlerGroup *HandlerGroup) MakeLeague(context echo.Context) error {
-	response, err := handlerGroup.Accessors.MakeLeague(context)
+func (handlerGroup *HandlerGroup) MakeUser(context echo.Context) error {
+	response, err := handlerGroup.Accessors.MakeUser(context)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}
@@ -49,13 +49,13 @@ func (handlerGroup *HandlerGroup) MakeLeague(context echo.Context) error {
 	return context.JSON(http.StatusOK, response)
 }
 
-func (handlerGroup *HandlerGroup) DeleteLeagueByID(context echo.Context) error {
+func (handlerGroup *HandlerGroup) DeleteUserByID(context echo.Context) error {
 	ID, err := strconv.Atoi(context.Param("id"))
 	if err != nil {
 		return err
 	}
 
-	err = handlerGroup.Accessors.DeleteLeagueByID(ID)
+	err = handlerGroup.Accessors.DeleteUserByID(ID)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}

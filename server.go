@@ -43,12 +43,23 @@ func main() {
 	router.Put("/api/league", handlerGroup.UpdateLeague)
 	router.Delete("/api/league/:id", handlerGroup.DeleteLeagueByID)
 
-	router.Get("/api/hitter", handlerGroup.GetHitters)
-	router.Get("/api/pitcher", handlerGroup.GetPitchers)
-	// router.Get("/api/players", handlerGroup.GeneratePlayers)
+	router.Get("/api/user", handlerGroup.GetAllUsers)
+	router.Get("/api/user/:id", handlerGroup.GetUserByID)
+	router.Post("/api/user", handlerGroup.MakeUser)
+	router.Put("/api/user", handlerGroup.UpdateUser)
+	router.Delete("/api/user/:id", handlerGroup.DeleteUserByID)
 
-	router.Put("/api/hitter", handlerGroup.GenerateHitter)
-	router.Put("/api/pitcher", handlerGroup.GeneratePitcher)
+	router.Get("/api/name", handlerGroup.GetAllNames)
+	router.Get("/api/name/:id", handlerGroup.GetNameByID)
+	router.Post("/api/name", handlerGroup.MakeName)
+	router.Put("/api/name", handlerGroup.UpdateName)
+	router.Delete("/api/name/:id", handlerGroup.DeleteNameByID)
+
+	router.Get("/api/email", handlerGroup.GetAllEmails)
+	router.Get("/api/email/:id", handlerGroup.GetEmailByID)
+	router.Post("/api/email", handlerGroup.MakeEmail)
+	router.Put("/api/email", handlerGroup.UpdateEmail)
+	router.Delete("/api/email/:id", handlerGroup.DeleteEmailByID)
 
 	router.Static("/*", "public")
 	router.Get("/", views.Frontend)
