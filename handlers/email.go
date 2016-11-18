@@ -73,5 +73,5 @@ func (handlerGroup *HandlerGroup) DeleteEmailByID(context echo.Context) error {
 		return context.String(http.StatusBadRequest, err.Error())
 	}
 
-	return jsonresp.New(context, http.StatusOK, "Successfully deleted")
+	return jsonresp.New(context.Response(), http.StatusOK, "Successfully deleted")
 }

@@ -2,7 +2,7 @@ package main
 
 import (
 	"html/template"
-	"log"
+	"net/http"
 	"os"
 
 	"github.com/jessemillar/american-dream-league/accessors"
@@ -11,7 +11,6 @@ import (
 	"github.com/jessemillar/american-dream-league/views"
 	"github.com/jessemillar/health"
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/engine/fasthttp"
 	"github.com/labstack/echo/middleware"
 )
 
@@ -33,44 +32,42 @@ func main() {
 	port := ":9999"
 	router := echo.New()
 	router.Pre(middleware.RemoveTrailingSlash())
-	router.SetRenderer(templateEngine)
+	router.Renderer = templateEngine
 
-	router.Get("/health", health.Check)
+	router.GET("/health", echo.WrapHandler(http.HandlerFunc(health.Check)))
 
-	router.Get("/api/league", handlerGroup.GetAllLeagues)
-	router.Get("/api/league/:id", handlerGroup.GetLeagueByID)
-	router.Post("/api/league", handlerGroup.MakeLeague)
-	router.Put("/api/league", handlerGroup.UpdateLeague)
-	router.Delete("/api/league/:id", handlerGroup.DeleteLeagueByID)
+	router.GET("/api/league", handlerGroup.GetAllLeagues)
+	router.GET("/api/league/:id", handlerGroup.GetLeagueByID)
+	router.POST("/api/league", handlerGroup.MakeLeague)
+	router.PUT("/api/league", handlerGroup.UpdateLeague)
+	router.DELETE("/api/league/:id", handlerGroup.DeleteLeagueByID)
 
-	router.Get("/api/user", handlerGroup.GetAllUsers)
-	router.Get("/api/user/:id", handlerGroup.GetUserByID)
-	router.Post("/api/user", handlerGroup.MakeUser)
-	router.Put("/api/user", handlerGroup.UpdateUser)
-	router.Delete("/api/user/:id", handlerGroup.DeleteUserByID)
+	router.GET("/api/user", handlerGroup.GetAllUsers)
+	router.GET("/api/user/:id", handlerGroup.GetUserByID)
+	router.POST("/api/user", handlerGroup.MakeUser)
+	router.PUT("/api/user", handlerGroup.UpdateUser)
+	router.DELETE("/api/user/:id", handlerGroup.DeleteUserByID)
 
-	router.Get("/api/name", handlerGroup.GetAllNames)
-	router.Get("/api/name/:id", handlerGroup.GetNameByID)
-	router.Post("/api/name", handlerGroup.MakeName)
-	router.Put("/api/name", handlerGroup.UpdateName)
-	router.Delete("/api/name/:id", handlerGroup.DeleteNameByID)
+	router.GET("/api/name", handlerGroup.GetAllNames)
+	router.GET("/api/name/:id", handlerGroup.GetNameByID)
+	router.POST("/api/name", handlerGroup.MakeName)
+	router.PUT("/api/name", handlerGroup.UpdateName)
+	router.DELETE("/api/name/:id", handlerGroup.DeleteNameByID)
 
-	router.Get("/api/email", handlerGroup.GetAllEmails)
-	router.Get("/api/email/:id", handlerGroup.GetEmailByID)
-	router.Post("/api/email", handlerGroup.MakeEmail)
-	router.Put("/api/email", handlerGroup.UpdateEmail)
-	router.Delete("/api/email/:id", handlerGroup.DeleteEmailByID)
+	router.GET("/api/email", handlerGroup.GetAllEmails)
+	router.GET("/api/email/:id", handlerGroup.GetEmailByID)
+	router.POST("/api/email", handlerGroup.MakeEmail)
+	router.PUT("/api/email", handlerGroup.UpdateEmail)
+	router.DELETE("/api/email/:id", handlerGroup.DeleteEmailByID)
 
-	router.Get("/api/password", handlerGroup.GetAllPasswords)
-	router.Get("/api/password/:id", handlerGroup.GetPasswordByID)
-	router.Post("/api/password", handlerGroup.MakePassword)
-	router.Put("/api/password", handlerGroup.UpdatePassword)
-	router.Delete("/api/password/:id", handlerGroup.DeletePasswordByID)
+	router.GET("/api/password", handlerGroup.GetAllPasswords)
+	router.GET("/api/password/:id", handlerGroup.GetPasswordByID)
+	router.POST("/api/password", handlerGroup.MakePassword)
+	router.PUT("/api/password", handlerGroup.UpdatePassword)
+	router.DELETE("/api/password/:id", handlerGroup.DeletePasswordByID)
 
 	router.Static("/*", "public")
-	router.Get("/", views.Frontend)
+	router.GET("/", views.Frontend)
 
-	log.Println("American Dream League is listening on " + port)
-	server := fasthttp.New(port)
-	router.Run(server)
+	router.Start(port)
 }
