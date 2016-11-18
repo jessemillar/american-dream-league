@@ -56,3 +56,26 @@ func (handlerGroup *HandlerGroup) MakeLeague(context echo.Context) error {
 
 	return context.JSON(http.StatusOK, response)
 }
+
+func (handlerGroup *HandlerGroup) DeleteLeagueByID(context echo.Context) error {
+	ID, err := strconv.Atoi(context.Param("id"))
+	if err != nil {
+		return err
+	}
+
+	err = handlerGroup.Accessors.DeleteLeagueByID(ID)
+	if err != nil {
+		return context.String(http.StatusBadRequest, err.Error())
+	}
+
+	return context.JSON(http.StatusOK, "")
+}
+
+func (handlerGroup *HandlerGroup) DeleteLeagueByName(context echo.Context) error {
+	err := handlerGroup.Accessors.DeleteLeagueByName(context.Param("name"))
+	if err != nil {
+		return context.String(http.StatusBadRequest, err.Error())
+	}
+
+	return context.JSON(http.StatusOK, "")
+}

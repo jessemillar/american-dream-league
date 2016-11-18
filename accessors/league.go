@@ -102,3 +102,28 @@ func (accessorGroup *AccessorGroup) MakeLeague(context echo.Context) (League, er
 
 	return league, nil
 }
+
+// DeleteLeagueByID deletes a league from the database
+func (accessorGroup *AccessorGroup) DeleteLeagueByID(ID int) error {
+	_, err := accessorGroup.Database.Query("DELETE FROM Leagues WHERE ID=?", ID)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// DeleteLeagueByName deletes a league from the database
+func (accessorGroup *AccessorGroup) DeleteLeagueByName(name string) error {
+	ID, err := accessorGroup.GetLeagueID(name)
+	if err != nil {
+		return err
+	}
+
+	err = accessorGroup.DeleteLeagueByID(ID)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

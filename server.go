@@ -49,6 +49,9 @@ func main() {
 
 	router.Post("/api/league", handlerGroup.MakeLeague)
 
+	router.Delete("/api/league/name/:name", handlerGroup.DeleteLeagueByName)
+	router.Delete("/api/league/id/:id", handlerGroup.DeleteLeagueByID)
+
 	router.Static("/*", "public")
 	router.Get("/", views.Frontend)
 
