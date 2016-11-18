@@ -61,6 +61,12 @@ func main() {
 	router.Put("/api/email", handlerGroup.UpdateEmail)
 	router.Delete("/api/email/:id", handlerGroup.DeleteEmailByID)
 
+	router.Get("/api/password", handlerGroup.GetAllPasswords)
+	router.Get("/api/password/:id", handlerGroup.GetPasswordByID)
+	router.Post("/api/password", handlerGroup.MakePassword)
+	router.Put("/api/password", handlerGroup.UpdatePassword)
+	router.Delete("/api/password/:id", handlerGroup.DeletePasswordByID)
+
 	router.Static("/*", "public")
 	router.Get("/", views.Frontend)
 
