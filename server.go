@@ -43,6 +43,7 @@ func main() {
 	// router.Get("/api/players", handlerGroup.GeneratePlayers)
 	// router.Get("/api/league/id/:id", handlerGroup.GetLeagueById)
 
+	router.Put("/api/league", handlerGroup.UpdateLeague)
 	router.Put("/api/hitter", handlerGroup.GenerateHitter)
 	router.Put("/api/pitcher", handlerGroup.GeneratePitcher)
 

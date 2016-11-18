@@ -2,12 +2,18 @@ package handlers
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo"
 )
 
 func (handlerGroup *HandlerGroup) GetLeagueById(context echo.Context) error {
-	response, err := handlerGroup.Accessors.GetLeagueById(context.Param("id"))
+	ID, err := strconv.Atoi(context.Param("id"))
+	if err != nil {
+		return err
+	}
+
+	response, err := handlerGroup.Accessors.GetLeagueById(ID)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}
@@ -26,6 +32,15 @@ func (handlerGroup *HandlerGroup) GetLeagueByName(context echo.Context) error {
 
 func (handlerGroup *HandlerGroup) GetAllLeagues(context echo.Context) error {
 	response, err := handlerGroup.Accessors.GetAllLeagues()
+	if err != nil {
+		return context.String(http.StatusBadRequest, err.Error())
+	}
+
+	return context.JSON(http.StatusOK, response)
+}
+
+func (handlerGroup *HandlerGroup) UpdateLeague(context echo.Context) error {
+	response, err := handlerGroup.Accessors.UpdateLeague(context)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}

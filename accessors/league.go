@@ -19,9 +19,9 @@ func (accessorGroup *AccessorGroup) GetLeagueByName(name string) (League, error)
 }
 
 // GetLeagueById returns a league from the database by leagueID
-func (accessorGroup *AccessorGroup) GetLeagueById(name string) (League, error) {
+func (accessorGroup *AccessorGroup) GetLeagueById(ID int) (League, error) {
 	league := &League{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM Leagues WHERE leagueID=?", name).Scan(&league.ID, &league.Name)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Leagues WHERE ID=?", ID).Scan(&league.ID, &league.Name)
 	if err != nil {
 		return League{}, err
 	}
@@ -59,6 +59,27 @@ func (accessorGroup *AccessorGroup) GetAllLeagues() ([]League, error) {
 	}
 
 	return leagues, nil
+}
+
+// UpdateLeague adds a league to the database
+func (accessorGroup *AccessorGroup) UpdateLeague(context echo.Context) (League, error) {
+	league := League{}
+	err := context.Bind(&league)
+	if err != nil {
+		return League{}, err
+	}
+
+	_, err = accessorGroup.Database.Query("UPDATE Leagues SET name=? WHERE ID=?", league.Name, league.ID)
+	if err != nil {
+		return League{}, err
+	}
+
+	league, err = accessorGroup.GetLeagueById(league.ID)
+	if err != nil {
+		return League{}, err
+	}
+
+	return league, nil
 }
 
 // MakeLeague adds a league to the database
