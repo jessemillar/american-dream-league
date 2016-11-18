@@ -1,7 +1,5 @@
 package accessors
 
-import "github.com/labstack/echo"
-
 type Name struct {
 	ID         int    `json:"id"`
 	FirstName  string `json:"firstName"`
@@ -54,14 +52,8 @@ func (accessorGroup *AccessorGroup) GetAllNames() ([]Name, error) {
 }
 
 // UpdateName adds a name to the database
-func (accessorGroup *AccessorGroup) UpdateName(context echo.Context) (Name, error) {
-	name := Name{}
-	err := context.Bind(&name)
-	if err != nil {
-		return Name{}, err
-	}
-
-	_, err = accessorGroup.Database.Query("UPDATE Names SET firstName=?, middleName=?, lastName=? WHERE ID=?", name.FirstName, name.MiddleName, name.LastName, name.ID)
+func (accessorGroup *AccessorGroup) UpdateName(name Name) (Name, error) {
+	_, err := accessorGroup.Database.Query("UPDATE Names SET firstName=?, middleName=?, lastName=? WHERE ID=?", name.FirstName, name.MiddleName, name.LastName, name.ID)
 	if err != nil {
 		return Name{}, err
 	}
@@ -75,14 +67,8 @@ func (accessorGroup *AccessorGroup) UpdateName(context echo.Context) (Name, erro
 }
 
 // MakeName adds a name to the database
-func (accessorGroup *AccessorGroup) MakeName(context echo.Context) (Name, error) {
-	name := Name{}
-	err := context.Bind(&name)
-	if err != nil {
-		return Name{}, err
-	}
-
-	_, err = accessorGroup.Database.Query("INSERT INTO Names (firstName, middleName, lastName) VALUES (?,?,?)", name.FirstName, name.MiddleName, name.LastName)
+func (accessorGroup *AccessorGroup) MakeName(name Name) (Name, error) {
+	_, err := accessorGroup.Database.Query("INSERT INTO Names (firstName, middleName, lastName) VALUES (?,?,?)", name.FirstName, name.MiddleName, name.LastName)
 	if err != nil {
 		return Name{}, err
 	}

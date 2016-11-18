@@ -1,18 +1,47 @@
 package accessors
 
-import "github.com/labstack/echo"
-
 type User struct {
-	ID       int    `json:"id"`
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	ID       int      `json:"id"`
+	Name     Name     `json:"name"`
+	Email    Email    `json:"email"`
+	Password Password `json:"password"`
+}
+
+// PopulateUser takes a mostly blank User struct and populates the values
+func (accessorGroup *AccessorGroup) PopulateUser(userID int, nameID int, emailID int, passwordID int) (User, error) {
+	name, err := accessorGroup.GetNameByID(nameID)
+	if err != nil {
+		return User{}, err
+	}
+
+	email, err := accessorGroup.GetEmailByID(emailID)
+	if err != nil {
+		return User{}, err
+	}
+
+	password, err := accessorGroup.GetPasswordByID(passwordID)
+	if err != nil {
+		return User{}, err
+	}
+
+	user := User{}
+	user.ID = userID
+	user.Name = name
+	user.Email = email
+	user.Password = password
+
+	return user, nil
 }
 
 // GetUserByID returns a user from the database by userID
 func (accessorGroup *AccessorGroup) GetUserByID(ID int) (User, error) {
 	user := &User{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM Users WHERE ID=?", ID).Scan(&user.ID, &user.Name)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Users WHERE ID=?", ID).Scan(&user.ID, &user.Name.ID, &user.Email.ID, &user.Password.ID)
+	if err != nil {
+		return User{}, err
+	}
+
+	*user, err = accessorGroup.PopulateUser(user.ID, user.Name.ID, user.Email.ID, user.Password.ID)
 	if err != nil {
 		return User{}, err
 	}
@@ -21,24 +50,25 @@ func (accessorGroup *AccessorGroup) GetUserByID(ID int) (User, error) {
 }
 
 // GetUserByName returns a user from the database by userID
-func (accessorGroup *AccessorGroup) GetUserByName(name string) (User, error) {
+func (accessorGroup *AccessorGroup) GetUserByName(firstName string, middleName string, lastName string) (User, error) {
 	user := &User{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM Users WHERE name=?", name).Scan(&user.ID, &user.Name)
+
+	name, err := accessorGroup.GetNameByName(firstName, middleName, lastName)
+	if err != nil {
+		return User{}, err
+	}
+
+	err = accessorGroup.Database.QueryRow("SELECT * FROM Users WHERE nameID=?", name.ID).Scan(&user.ID, &user.Name.ID, &user.Email.ID, &user.Password.ID)
+	if err != nil {
+		return User{}, err
+	}
+
+	*user, err = accessorGroup.PopulateUser(user.ID, user.Name.ID, user.Email.ID, user.Password.ID)
 	if err != nil {
 		return User{}, err
 	}
 
 	return *user, nil
-}
-
-// GetUserID returns a userID from the database from a name
-func (accessorGroup *AccessorGroup) GetUserID(name string) (int, error) {
-	user, err := accessorGroup.GetUserByName(name)
-	if err != nil {
-		return 0, err
-	}
-
-	return user.ID, nil
 }
 
 // GetAllUsers gets all users from the database
@@ -52,7 +82,12 @@ func (accessorGroup *AccessorGroup) GetAllUsers() ([]User, error) {
 
 	for rows.Next() {
 		var newUser = User{}
-		err = rows.Scan(&newUser.ID, &newUser.Name)
+		err = rows.Scan(&newUser.ID, &newUser.Name.ID, &newUser.Email.ID, &newUser.Password.ID)
+		if err != nil {
+			return []User{}, err
+		}
+
+		newUser, err = accessorGroup.PopulateUser(newUser.ID, newUser.Name.ID, newUser.Email.ID, newUser.Password.ID)
 		if err != nil {
 			return []User{}, err
 		}
@@ -63,15 +98,9 @@ func (accessorGroup *AccessorGroup) GetAllUsers() ([]User, error) {
 	return users, nil
 }
 
-// UpdateUser adds a user to the database
-func (accessorGroup *AccessorGroup) UpdateUser(context echo.Context) (User, error) {
-	user := User{}
-	err := context.Bind(&user)
-	if err != nil {
-		return User{}, err
-	}
-
-	_, err = accessorGroup.Database.Query("UPDATE Users SET name=? WHERE ID=?", user.Name, user.ID)
+// UpdateUser updates user information in the database
+func (accessorGroup *AccessorGroup) UpdateUser(user User) (User, error) {
+	_, err := accessorGroup.Database.Query("UPDATE Users SET nameID=? AND emailID=? AND passwordID=? WHERE ID=?", user.Name.ID, user.Email.ID, user.Password.ID, user.ID)
 	if err != nil {
 		return User{}, err
 	}
@@ -85,19 +114,28 @@ func (accessorGroup *AccessorGroup) UpdateUser(context echo.Context) (User, erro
 }
 
 // MakeUser adds a user to the database
-func (accessorGroup *AccessorGroup) MakeUser(context echo.Context) (User, error) {
-	user := User{}
-	err := context.Bind(&user)
+func (accessorGroup *AccessorGroup) MakeUser(user User) (User, error) {
+	email, err := accessorGroup.MakeEmail(user.Email)
 	if err != nil {
 		return User{}, err
 	}
 
-	_, err = accessorGroup.Database.Query("INSERT INTO Users (name) VALUES (?)", user.Name)
+	password, err := accessorGroup.MakePassword(user.Password)
 	if err != nil {
 		return User{}, err
 	}
 
-	user, err = accessorGroup.GetUserByName(user.Name)
+	name, err := accessorGroup.MakeName(user.Name)
+	if err != nil {
+		return User{}, err
+	}
+
+	_, err = accessorGroup.Database.Query("INSERT INTO Users (nameID, emailID, passwordID) VALUES (?,?,?)", name.ID, email.ID, password.ID)
+	if err != nil {
+		return User{}, err
+	}
+
+	user, err = accessorGroup.GetUserByName(name.FirstName, name.MiddleName, name.LastName)
 	if err != nil {
 		return User{}, err
 	}

@@ -6,7 +6,7 @@ CREATE TABLE Names(ID int NOT NULL AUTO_INCREMENT, firstName varchar(500), middl
 CREATE TABLE Leagues(ID int NOT NULL AUTO_INCREMENT, name varchar(500), PRIMARY KEY (ID));
 CREATE TABLE Emails(ID int NOT NULL AUTO_INCREMENT, username varchar(500), domain varchar(500), PRIMARY KEY (ID));
 CREATE TABLE Passwords(ID int NOT NULL AUTO_INCREMENT, hash varchar(500), PRIMARY KEY (ID));
-CREATE TABLE Users(ID int NOT NULL AUTO_INCREMENT, nameId int, emailID int, passwordID int, PRIMARY KEY (ID), FOREIGN KEY (nameID) REFERENCES Names(ID), FOREIGN KEY (emailID) REFERENCES Emails(ID), FOREIGN KEY (passwordID) REFERENCES Passwords(ID));
+CREATE TABLE Users(ID int NOT NULL AUTO_INCREMENT, nameID int, emailID int, passwordID int, PRIMARY KEY (ID), FOREIGN KEY (nameID) REFERENCES Names(ID), FOREIGN KEY (emailID) REFERENCES Emails(ID), FOREIGN KEY (passwordID) REFERENCES Passwords(ID));
 CREATE TABLE Mascots(ID int NOT NULL AUTO_INCREMENT, name varchar(500), PRIMARY KEY (ID));
 CREATE TABLE Teams(ID int NOT NULL AUTO_INCREMENT, leagueID int,  mascotID int, logoID int, nameID int, PRIMARY KEY (ID), FOREIGN KEY (leagueID) REFERENCES Leagues(ID), FOREIGN KEY (mascotID) REFERENCES Mascots(ID), FOREIGN KEY (nameID) REFERENCES Names(ID));
 CREATE TABLE Logos(ID int NOT NULL AUTO_INCREMENT, filename varchar(500), PRIMARY KEY (ID));

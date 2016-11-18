@@ -1,7 +1,5 @@
 package accessors
 
-import "github.com/labstack/echo"
-
 type Password struct {
 	ID   int    `json:"id"`
 	Hash string `json:"hash"`
@@ -62,14 +60,8 @@ func (accessorGroup *AccessorGroup) GetAllPasswords() ([]Password, error) {
 }
 
 // UpdatePassword adds a password to the database
-func (accessorGroup *AccessorGroup) UpdatePassword(context echo.Context) (Password, error) {
-	password := Password{}
-	err := context.Bind(&password)
-	if err != nil {
-		return Password{}, err
-	}
-
-	_, err = accessorGroup.Database.Query("UPDATE Passwords SET hash=? WHERE ID=?", password.Hash, password.ID)
+func (accessorGroup *AccessorGroup) UpdatePassword(password Password) (Password, error) {
+	_, err := accessorGroup.Database.Query("UPDATE Passwords SET hash=? WHERE ID=?", password.Hash, password.ID)
 	if err != nil {
 		return Password{}, err
 	}
@@ -83,14 +75,8 @@ func (accessorGroup *AccessorGroup) UpdatePassword(context echo.Context) (Passwo
 }
 
 // MakePassword adds a password to the database
-func (accessorGroup *AccessorGroup) MakePassword(context echo.Context) (Password, error) {
-	password := Password{}
-	err := context.Bind(&password)
-	if err != nil {
-		return Password{}, err
-	}
-
-	_, err = accessorGroup.Database.Query("INSERT INTO Passwords (hash) VALUES (?)", password.Hash)
+func (accessorGroup *AccessorGroup) MakePassword(password Password) (Password, error) {
+	_, err := accessorGroup.Database.Query("INSERT INTO Passwords (hash) VALUES (?)", password.Hash)
 	if err != nil {
 		return Password{}, err
 	}

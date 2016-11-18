@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/jessemillar/american-dream-league/accessors"
 	"github.com/jessemillar/jsonresp"
 	"github.com/labstack/echo"
 )
@@ -32,7 +33,13 @@ func (handlerGroup *HandlerGroup) GetAllPasswords(context echo.Context) error {
 }
 
 func (handlerGroup *HandlerGroup) UpdatePassword(context echo.Context) error {
-	response, err := handlerGroup.Accessors.UpdatePassword(context)
+	password := accessors.Password{}
+	err := context.Bind(&password)
+	if err != nil {
+		return err
+	}
+
+	response, err := handlerGroup.Accessors.UpdatePassword(password)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}
@@ -41,7 +48,13 @@ func (handlerGroup *HandlerGroup) UpdatePassword(context echo.Context) error {
 }
 
 func (handlerGroup *HandlerGroup) MakePassword(context echo.Context) error {
-	response, err := handlerGroup.Accessors.MakePassword(context)
+	password := accessors.Password{}
+	err := context.Bind(&password)
+	if err != nil {
+		return err
+	}
+
+	response, err := handlerGroup.Accessors.MakePassword(password)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}

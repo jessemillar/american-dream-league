@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/jessemillar/american-dream-league/accessors"
 	"github.com/jessemillar/jsonresp"
 	"github.com/labstack/echo"
 )
@@ -32,7 +33,13 @@ func (handlerGroup *HandlerGroup) GetAllUsers(context echo.Context) error {
 }
 
 func (handlerGroup *HandlerGroup) UpdateUser(context echo.Context) error {
-	response, err := handlerGroup.Accessors.UpdateUser(context)
+	user := accessors.User{}
+	err := context.Bind(&user)
+	if err != nil {
+		return err
+	}
+
+	response, err := handlerGroup.Accessors.UpdateUser(user)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}
@@ -41,7 +48,13 @@ func (handlerGroup *HandlerGroup) UpdateUser(context echo.Context) error {
 }
 
 func (handlerGroup *HandlerGroup) MakeUser(context echo.Context) error {
-	response, err := handlerGroup.Accessors.MakeUser(context)
+	user := accessors.User{}
+	err := context.Bind(&user)
+	if err != nil {
+		return err
+	}
+
+	response, err := handlerGroup.Accessors.MakeUser(user)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}

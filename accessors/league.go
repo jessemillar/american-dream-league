@@ -1,7 +1,5 @@
 package accessors
 
-import "github.com/labstack/echo"
-
 type League struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
@@ -62,14 +60,8 @@ func (accessorGroup *AccessorGroup) GetAllLeagues() ([]League, error) {
 }
 
 // UpdateLeague adds a league to the database
-func (accessorGroup *AccessorGroup) UpdateLeague(context echo.Context) (League, error) {
-	league := League{}
-	err := context.Bind(&league)
-	if err != nil {
-		return League{}, err
-	}
-
-	_, err = accessorGroup.Database.Query("UPDATE Leagues SET name=? WHERE ID=?", league.Name, league.ID)
+func (accessorGroup *AccessorGroup) UpdateLeague(league League) (League, error) {
+	_, err := accessorGroup.Database.Query("UPDATE Leagues SET name=? WHERE ID=?", league.Name, league.ID)
 	if err != nil {
 		return League{}, err
 	}
@@ -83,14 +75,8 @@ func (accessorGroup *AccessorGroup) UpdateLeague(context echo.Context) (League, 
 }
 
 // MakeLeague adds a league to the database
-func (accessorGroup *AccessorGroup) MakeLeague(context echo.Context) (League, error) {
-	league := League{}
-	err := context.Bind(&league)
-	if err != nil {
-		return League{}, err
-	}
-
-	_, err = accessorGroup.Database.Query("INSERT INTO Leagues (name) VALUES (?)", league.Name)
+func (accessorGroup *AccessorGroup) MakeLeague(league League) (League, error) {
+	_, err := accessorGroup.Database.Query("INSERT INTO Leagues (name) VALUES (?)", league.Name)
 	if err != nil {
 		return League{}, err
 	}

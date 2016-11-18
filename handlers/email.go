@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/jessemillar/american-dream-league/accessors"
 	"github.com/jessemillar/jsonresp"
 	"github.com/labstack/echo"
 )
@@ -32,7 +33,13 @@ func (handlerGroup *HandlerGroup) GetAllEmails(context echo.Context) error {
 }
 
 func (handlerGroup *HandlerGroup) UpdateEmail(context echo.Context) error {
-	response, err := handlerGroup.Accessors.UpdateEmail(context)
+	email := accessors.Email{}
+	err := context.Bind(&email)
+	if err != nil {
+		return err
+	}
+
+	response, err := handlerGroup.Accessors.UpdateEmail(email)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}
@@ -41,7 +48,13 @@ func (handlerGroup *HandlerGroup) UpdateEmail(context echo.Context) error {
 }
 
 func (handlerGroup *HandlerGroup) MakeEmail(context echo.Context) error {
-	response, err := handlerGroup.Accessors.MakeEmail(context)
+	email := accessors.Email{}
+	err := context.Bind(&email)
+	if err != nil {
+		return err
+	}
+
+	response, err := handlerGroup.Accessors.MakeEmail(email)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}

@@ -1,7 +1,5 @@
 package accessors
 
-import "github.com/labstack/echo"
-
 type Email struct {
 	ID       int    `json:"id"`
 	Username string `json:"username"`
@@ -53,14 +51,8 @@ func (accessorGroup *AccessorGroup) GetAllEmails() ([]Email, error) {
 }
 
 // UpdateEmail adds a email to the database
-func (accessorGroup *AccessorGroup) UpdateEmail(context echo.Context) (Email, error) {
-	email := Email{}
-	err := context.Bind(&email)
-	if err != nil {
-		return Email{}, err
-	}
-
-	_, err = accessorGroup.Database.Query("UPDATE Emails SET username=?, domain=? WHERE ID=?", email.Username, email.Domain, email.ID)
+func (accessorGroup *AccessorGroup) UpdateEmail(email Email) (Email, error) {
+	_, err := accessorGroup.Database.Query("UPDATE Emails SET username=?, domain=? WHERE ID=?", email.Username, email.Domain, email.ID)
 	if err != nil {
 		return Email{}, err
 	}
@@ -74,14 +66,8 @@ func (accessorGroup *AccessorGroup) UpdateEmail(context echo.Context) (Email, er
 }
 
 // MakeEmail adds a email to the database
-func (accessorGroup *AccessorGroup) MakeEmail(context echo.Context) (Email, error) {
-	email := Email{}
-	err := context.Bind(&email)
-	if err != nil {
-		return Email{}, err
-	}
-
-	_, err = accessorGroup.Database.Query("INSERT INTO Emails (username, domain) VALUES (?,?)", email.Username, email.Domain)
+func (accessorGroup *AccessorGroup) MakeEmail(email Email) (Email, error) {
+	_, err := accessorGroup.Database.Query("INSERT INTO Emails (username, domain) VALUES (?,?)", email.Username, email.Domain)
 	if err != nil {
 		return Email{}, err
 	}
