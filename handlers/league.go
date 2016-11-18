@@ -34,7 +34,7 @@ func (handlerGroup *HandlerGroup) GetAllLeagues(context echo.Context) error {
 }
 
 func (handlerGroup *HandlerGroup) MakeLeague(context echo.Context) error {
-	response, err := handlerGroup.Accessors.MakeLeague(context.Param("name"))
+	response, err := handlerGroup.Accessors.MakeLeague(context)
 	if err != nil {
 		return context.String(http.StatusBadRequest, err.Error())
 	}

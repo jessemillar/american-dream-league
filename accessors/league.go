@@ -1,5 +1,7 @@
 package accessors
 
+import "github.com/labstack/echo"
+
 type League struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
@@ -8,7 +10,7 @@ type League struct {
 // GetLeagueByName returns a league from the database by name
 func (accessorGroup *AccessorGroup) GetLeagueByName(name string) (League, error) {
 	league := &League{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM League WHERE name=?", name).Scan(&league.ID, &league.Name)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Leagues WHERE name=?", name).Scan(&league.ID, &league.Name)
 	if err != nil {
 		return League{}, err
 	}
@@ -19,7 +21,7 @@ func (accessorGroup *AccessorGroup) GetLeagueByName(name string) (League, error)
 // GetLeagueById returns a league from the database by leagueID
 func (accessorGroup *AccessorGroup) GetLeagueById(name string) (League, error) {
 	league := &League{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM League WHERE leagueID=?", name).Scan(&league.ID, &league.Name)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Leagues WHERE leagueID=?", name).Scan(&league.ID, &league.Name)
 	if err != nil {
 		return League{}, err
 	}
@@ -60,13 +62,19 @@ func (accessorGroup *AccessorGroup) GetAllLeagues() ([]League, error) {
 }
 
 // MakeLeague adds a league to the database
-func (accessorGroup *AccessorGroup) MakeLeague(name string) (League, error) {
-	_, err := accessorGroup.Database.Query("INSERT INTO League (name) VALUES (?)", name)
+func (accessorGroup *AccessorGroup) MakeLeague(context echo.Context) (League, error) {
+	league := League{}
+	err := context.Bind(&league)
 	if err != nil {
 		return League{}, err
 	}
 
-	league, err := accessorGroup.GetLeagueByName(name)
+	_, err = accessorGroup.Database.Query("INSERT INTO Leagues (name) VALUES (?)", league.Name)
+	if err != nil {
+		return League{}, err
+	}
+
+	league, err = accessorGroup.GetLeagueByName(league.Name)
 	if err != nil {
 		return League{}, err
 	}

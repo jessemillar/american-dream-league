@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/jessemillar/american-dream-league/helpers"
 	"github.com/jessemillar/american-dream-league/accessors"
 	"github.com/jessemillar/american-dream-league/handlers"
+	"github.com/jessemillar/american-dream-league/helpers"
 	"github.com/jessemillar/american-dream-league/views"
 	"github.com/jessemillar/health"
 	"github.com/labstack/echo"
@@ -45,6 +45,8 @@ func main() {
 
 	router.Put("/api/hitter", handlerGroup.GenerateHitter)
 	router.Put("/api/pitcher", handlerGroup.GeneratePitcher)
+
+	router.Post("/api/league", handlerGroup.MakeLeague)
 
 	router.Static("/*", "public")
 	router.Get("/", views.Frontend)
