@@ -73,5 +73,6 @@ func (handlerGroup *HandlerGroup) DeletePasswordByID(context echo.Context) error
 		return context.String(http.StatusBadRequest, err.Error())
 	}
 
-	return jsonresp.New(context.Response(), http.StatusOK, "Successfully deleted")
+	jsonresp.New(context.Response(), http.StatusOK, "Successfully deleted")
+	return nil
 }
