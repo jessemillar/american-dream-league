@@ -66,6 +66,24 @@ func main() {
 	router.PUT("/api/password", handlerGroup.UpdatePassword)
 	router.DELETE("/api/password/:id", handlerGroup.DeletePasswordByID)
 
+	router.GET("/api/position", handlerGroup.GetAllPositions)
+	router.GET("/api/position/:id", handlerGroup.GetPositionByID)
+	router.POST("/api/position", handlerGroup.MakePosition)
+	router.PUT("/api/position", handlerGroup.UpdatePosition)
+	router.DELETE("/api/position/:id", handlerGroup.DeletePositionByID)
+
+	router.GET("/api/mascot", handlerGroup.GetAllMascots)
+	router.GET("/api/mascot/:id", handlerGroup.GetMascotByID)
+	router.POST("/api/mascot", handlerGroup.MakeMascot)
+	router.PUT("/api/mascot", handlerGroup.UpdateMascot)
+	router.DELETE("/api/mascot/:id", handlerGroup.DeleteMascotByID)
+
+	router.GET("/api/player", handlerGroup.GetAllPlayers)
+	router.GET("/api/player/:id", handlerGroup.GetPlayerByID)
+	router.POST("/api/player", handlerGroup.MakePlayer)
+	router.PUT("/api/player", handlerGroup.UpdatePlayer)
+	router.DELETE("/api/player/:id", handlerGroup.DeletePlayerByID)
+
 	router.Static("/*", "public")
 	router.GET("/", views.Frontend)
 

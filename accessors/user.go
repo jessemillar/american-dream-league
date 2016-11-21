@@ -115,22 +115,12 @@ func (accessorGroup *AccessorGroup) UpdateUser(user User) (User, error) {
 
 // MakeUser adds a user to the database
 func (accessorGroup *AccessorGroup) MakeUser(user User) (User, error) {
-	email, err := accessorGroup.MakeEmail(user.Email)
+	_, err := accessorGroup.Database.Query("INSERT INTO Users (nameID, emailID, passwordID) VALUES (?,?,?)", user.Name.ID, user.Email.ID, user.Password.ID)
 	if err != nil {
 		return User{}, err
 	}
 
-	password, err := accessorGroup.MakePassword(user.Password)
-	if err != nil {
-		return User{}, err
-	}
-
-	name, err := accessorGroup.MakeName(user.Name)
-	if err != nil {
-		return User{}, err
-	}
-
-	_, err = accessorGroup.Database.Query("INSERT INTO Users (nameID, emailID, passwordID) VALUES (?,?,?)", name.ID, email.ID, password.ID)
+	name, err := accessorGroup.GetNameByID(user.Name.ID)
 	if err != nil {
 		return User{}, err
 	}
