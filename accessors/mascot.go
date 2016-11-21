@@ -2,13 +2,13 @@ package accessors
 
 type Mascot struct {
 	ID   int    `json:"id"`
-	Hash string `json:"hash"`
+	Name string `json:"name"`
 }
 
 // GetMascotByID returns a mascot from the database by mascotID
 func (accessorGroup *AccessorGroup) GetMascotByID(ID int) (Mascot, error) {
 	mascot := &Mascot{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM Mascots WHERE ID=?", ID).Scan(&mascot.ID, &mascot.Hash)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Mascots WHERE ID=?", ID).Scan(&mascot.ID, &mascot.Name)
 	if err != nil {
 		return Mascot{}, err
 	}
@@ -16,25 +16,15 @@ func (accessorGroup *AccessorGroup) GetMascotByID(ID int) (Mascot, error) {
 	return *mascot, nil
 }
 
-// GetMascotByHash returns a mascot from the database by mascotID
-func (accessorGroup *AccessorGroup) GetMascotByHash(hash string) (Mascot, error) {
+// GetMascotByName returns a mascot from the database by mascotID
+func (accessorGroup *AccessorGroup) GetMascotByName(name string) (Mascot, error) {
 	mascot := &Mascot{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM Mascots WHERE hash=?", hash).Scan(&mascot.ID, &mascot.Hash)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Mascots WHERE name=?", name).Scan(&mascot.ID, &mascot.Name)
 	if err != nil {
 		return Mascot{}, err
 	}
 
 	return *mascot, nil
-}
-
-// GetMascotID returns a mascotID from the database from a hash
-func (accessorGroup *AccessorGroup) GetMascotID(hash string) (int, error) {
-	mascot, err := accessorGroup.GetMascotByHash(hash)
-	if err != nil {
-		return 0, err
-	}
-
-	return mascot.ID, nil
 }
 
 // GetAllMascots gets all mascots from the database
@@ -48,7 +38,7 @@ func (accessorGroup *AccessorGroup) GetAllMascots() ([]Mascot, error) {
 
 	for rows.Next() {
 		var newMascot = Mascot{}
-		err = rows.Scan(&newMascot.ID, &newMascot.Hash)
+		err = rows.Scan(&newMascot.ID, &newMascot.Name)
 		if err != nil {
 			return []Mascot{}, err
 		}
@@ -61,7 +51,7 @@ func (accessorGroup *AccessorGroup) GetAllMascots() ([]Mascot, error) {
 
 // UpdateMascot adds a mascot to the database
 func (accessorGroup *AccessorGroup) UpdateMascot(mascot Mascot) (Mascot, error) {
-	_, err := accessorGroup.Database.Query("UPDATE Mascots SET hash=? WHERE ID=?", mascot.Hash, mascot.ID)
+	_, err := accessorGroup.Database.Query("UPDATE Mascots SET name=? WHERE ID=?", mascot.Name, mascot.ID)
 	if err != nil {
 		return Mascot{}, err
 	}
@@ -76,12 +66,12 @@ func (accessorGroup *AccessorGroup) UpdateMascot(mascot Mascot) (Mascot, error) 
 
 // MakeMascot adds a mascot to the database
 func (accessorGroup *AccessorGroup) MakeMascot(mascot Mascot) (Mascot, error) {
-	_, err := accessorGroup.Database.Query("INSERT INTO Mascots (hash) VALUES (?)", mascot.Hash)
+	_, err := accessorGroup.Database.Query("INSERT INTO Mascots (name) VALUES (?)", mascot.Name)
 	if err != nil {
 		return Mascot{}, err
 	}
 
-	mascot, err = accessorGroup.GetMascotByHash(mascot.Hash)
+	mascot, err = accessorGroup.GetMascotByName(mascot.Name)
 	if err != nil {
 		return Mascot{}, err
 	}

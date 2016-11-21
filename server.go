@@ -84,6 +84,12 @@ func main() {
 	router.PUT("/api/player", handlerGroup.UpdatePlayer)
 	router.DELETE("/api/player/:id", handlerGroup.DeletePlayerByID)
 
+	router.GET("/api/team", handlerGroup.GetAllTeams)
+	router.GET("/api/team/:id", handlerGroup.GetTeamByID)
+	router.POST("/api/team", handlerGroup.MakeTeam)
+	router.PUT("/api/team", handlerGroup.UpdateTeam)
+	router.DELETE("/api/team/:id", handlerGroup.DeleteTeamByID)
+
 	router.Static("/*", "public")
 	router.GET("/", views.Frontend)
 

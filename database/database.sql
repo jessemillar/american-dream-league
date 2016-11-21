@@ -8,7 +8,7 @@ CREATE TABLE Emails(ID int NOT NULL AUTO_INCREMENT, username varchar(500), domai
 CREATE TABLE Passwords(ID int NOT NULL AUTO_INCREMENT, hash varchar(500), PRIMARY KEY (ID));
 CREATE TABLE Users(ID int NOT NULL AUTO_INCREMENT, nameID int, emailID int, passwordID int, PRIMARY KEY (ID), FOREIGN KEY (nameID) REFERENCES Names(ID), FOREIGN KEY (emailID) REFERENCES Emails(ID), FOREIGN KEY (passwordID) REFERENCES Passwords(ID));
 CREATE TABLE Mascots(ID int NOT NULL AUTO_INCREMENT, name varchar(500), PRIMARY KEY (ID));
-CREATE TABLE Teams(ID int NOT NULL AUTO_INCREMENT, leagueID int,  mascotID int, nameID int, PRIMARY KEY (ID), FOREIGN KEY (leagueID) REFERENCES Leagues(ID), FOREIGN KEY (mascotID) REFERENCES Mascots(ID), FOREIGN KEY (nameID) REFERENCES Names(ID));
+CREATE TABLE Teams(ID int NOT NULL AUTO_INCREMENT, name varchar(500), leagueID int, mascotID int, PRIMARY KEY (ID), FOREIGN KEY (leagueID) REFERENCES Leagues(ID), FOREIGN KEY (mascotID) REFERENCES Mascots(ID));
 CREATE TABLE Positions(ID int NOT NULL AUTO_INCREMENT, name varchar(500), PRIMARY KEY (ID));
 CREATE TABLE Players(ID int NOT NULL AUTO_INCREMENT, age int, nameID int, positionID int, PRIMARY KEY (ID), FOREIGN KEY (nameID) REFERENCES Names(ID), FOREIGN KEY (positionID) REFERENCES Positions(ID));
 CREATE TABLE Pitchers(ID int NOT NULL AUTO_INCREMENT, saves int, innings int, WHIP int, ERA int, playerID int, PRIMARY KEY (ID), FOREIGN KEY (playerID) REFERENCES Players(ID));
@@ -31,6 +31,12 @@ INSERT INTO Users(nameID,emailID,passwordID) VALUES (2,2,2);
 
 INSERT INTO Leagues(name) VALUES ("Test 1");
 INSERT INTO Leagues(name) VALUES ("Test 2");
+
+INSERT INTO Mascots(name) VALUES ("Perfect Doggo");
+INSERT INTO Mascots(name) VALUES ("Birdie");
+
+INSERT INTO Teams(leagueID, mascotID, name) VALUES(1, 1, "Doggos");
+INSERT INTO Teams(leagueID, mascotID, name) VALUES(2, 2, "Birds");
 
 INSERT INTO Positions(name) VALUES ("Outfielder");
 INSERT INTO Positions(name) VALUES ("Second Base");
