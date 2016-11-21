@@ -32,6 +32,20 @@ func (handlerGroup *HandlerGroup) GetAllPlayers(context echo.Context) error {
 	return context.JSON(http.StatusOK, response)
 }
 
+func (handlerGroup *HandlerGroup) GetAllPlayersByTeamID(context echo.Context) error {
+	ID, err := strconv.Atoi(context.Param("id"))
+	if err != nil {
+		return err
+	}
+
+	response, err := handlerGroup.Accessors.GetAllPlayersByTeamID(ID)
+	if err != nil {
+		return context.String(http.StatusBadRequest, err.Error())
+	}
+
+	return context.JSON(http.StatusOK, response)
+}
+
 func (handlerGroup *HandlerGroup) UpdatePlayer(context echo.Context) error {
 	player := accessors.Player{}
 	err := context.Bind(&player)

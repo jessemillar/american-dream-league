@@ -10,7 +10,7 @@ CREATE TABLE Users(ID int NOT NULL AUTO_INCREMENT, nameID int, emailID int, pass
 CREATE TABLE Mascots(ID int NOT NULL AUTO_INCREMENT, name varchar(500), PRIMARY KEY (ID));
 CREATE TABLE Teams(ID int NOT NULL AUTO_INCREMENT, name varchar(500), leagueID int, mascotID int, PRIMARY KEY (ID), FOREIGN KEY (leagueID) REFERENCES Leagues(ID), FOREIGN KEY (mascotID) REFERENCES Mascots(ID));
 CREATE TABLE Positions(ID int NOT NULL AUTO_INCREMENT, name varchar(500), PRIMARY KEY (ID));
-CREATE TABLE Players(ID int NOT NULL AUTO_INCREMENT, age int, nameID int, positionID int, PRIMARY KEY (ID), FOREIGN KEY (nameID) REFERENCES Names(ID), FOREIGN KEY (positionID) REFERENCES Positions(ID));
+CREATE TABLE Players(ID int NOT NULL AUTO_INCREMENT, age int, nameID int, teamID int, positionID int, PRIMARY KEY (ID), FOREIGN KEY (teamID) REFERENCES Teams(ID), FOREIGN KEY (nameID) REFERENCES Names(ID), FOREIGN KEY (positionID) REFERENCES Positions(ID));
 CREATE TABLE Pitchers(ID int NOT NULL AUTO_INCREMENT, saves int, innings int, WHIP int, ERA int, playerID int, PRIMARY KEY (ID), FOREIGN KEY (playerID) REFERENCES Players(ID));
 CREATE TABLE Hitters(ID int NOT NULL AUTO_INCREMENT, onBasePercent int, battingAverage int, slugPercent int, playerID int, atBats int, PRIMARY KEY (ID), FOREIGN KEY (playerID) REFERENCES Players(ID));
 CREATE TABLE Hits(ID int NOT NULL AUTO_INCREMENT, singles int, doubles int, triples int, homeruns int, PRIMARY KEY (ID));
@@ -44,5 +44,5 @@ INSERT INTO Positions(name) VALUES ("Second Base");
 INSERT INTO Names(firstName,middleName,lastName) VALUES ("Ralph","Sergio","Roddy");
 INSERT INTO Names(firstName,middleName,lastName) VALUES ("Jeremy","Steer","Garcia");
 
-INSERT INTO Players(age,nameID,positionID) VALUES (36,3,1);
-INSERT INTO Players(age,nameID,positionID) VALUES (30,4,2);
+INSERT INTO Players(age,nameID,positionID,teamID) VALUES (36,3,1,1);
+INSERT INTO Players(age,nameID,positionID,teamID) VALUES (30,4,2,2);

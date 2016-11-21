@@ -80,6 +80,7 @@ func main() {
 
 	router.GET("/api/player", handlerGroup.GetAllPlayers)
 	router.GET("/api/player/:id", handlerGroup.GetPlayerByID)
+	router.GET("/api/player/team/:id", handlerGroup.GetAllPlayersByTeamID)
 	router.POST("/api/player", handlerGroup.MakePlayer)
 	router.PUT("/api/player", handlerGroup.UpdatePlayer)
 	router.DELETE("/api/player/:id", handlerGroup.DeletePlayerByID)

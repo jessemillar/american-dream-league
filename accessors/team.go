@@ -1,14 +1,42 @@
 package accessors
 
 type Team struct {
-	ID     int    `json:"id"`
-	Name   string `json:"name"`
-	League League `json:"league"`
-	Mascot Mascot `json:"mascot"`
+	ID      int      `json:"id"`
+	Name    string   `json:"name"`
+	League  League   `json:"league"`
+	Mascot  Mascot   `json:"mascot"`
+	Players []Player `json:"players,omitempty"`
 }
 
 // PopulateTeam takes a mostly blank Team struct and populates the values
 func (accessorGroup *AccessorGroup) PopulateTeam(teamID int, name string, leagueID int, mascotID int) (Team, error) {
+	league, err := accessorGroup.GetLeagueByID(leagueID)
+	if err != nil {
+		return Team{}, err
+	}
+
+	mascot, err := accessorGroup.GetMascotByID(mascotID)
+	if err != nil {
+		return Team{}, err
+	}
+
+	players, err := accessorGroup.GetAllPlayersByTeamID(teamID)
+	if err != nil {
+		return Team{}, err
+	}
+
+	team := Team{}
+	team.ID = teamID
+	team.Name = name
+	team.League = league
+	team.Mascot = mascot
+	team.Players = players
+
+	return team, nil
+}
+
+// PopulateTeamMeta takes a mostly blank Team struct and populates the values without the players list
+func (accessorGroup *AccessorGroup) PopulateTeamMeta(teamID int, name string, leagueID int, mascotID int) (Team, error) {
 	league, err := accessorGroup.GetLeagueByID(leagueID)
 	if err != nil {
 		return Team{}, err
@@ -37,6 +65,22 @@ func (accessorGroup *AccessorGroup) GetTeamByID(ID int) (Team, error) {
 	}
 
 	*team, err = accessorGroup.PopulateTeam(team.ID, team.Name, team.League.ID, team.Mascot.ID)
+	if err != nil {
+		return Team{}, err
+	}
+
+	return *team, nil
+}
+
+// GetTeamMetaByID returns a team from the database by teamID
+func (accessorGroup *AccessorGroup) GetTeamMetaByID(ID int) (Team, error) {
+	team := &Team{}
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Teams WHERE ID=?", ID).Scan(&team.ID, &team.Name, &team.League.ID, &team.Mascot.ID)
+	if err != nil {
+		return Team{}, err
+	}
+
+	*team, err = accessorGroup.PopulateTeamMeta(team.ID, team.Name, team.League.ID, team.Mascot.ID)
 	if err != nil {
 		return Team{}, err
 	}

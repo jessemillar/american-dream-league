@@ -4,11 +4,12 @@ type Player struct {
 	ID       int      `json:"id"`
 	Age      int      `json:"age"`
 	Name     Name     `json:"name"`
+	Team     Team     `json:"team"`
 	Position Position `json:"position"`
 }
 
 // PopulatePlayer takes a mostly blank Player struct and populates the values
-func (accessorGroup *AccessorGroup) PopulatePlayer(playerID int, age int, nameID int, positionID int) (Player, error) {
+func (accessorGroup *AccessorGroup) PopulatePlayer(playerID int, age int, nameID int, teamID int, positionID int) (Player, error) {
 	name, err := accessorGroup.GetNameByID(nameID)
 	if err != nil {
 		return Player{}, err
@@ -19,10 +20,16 @@ func (accessorGroup *AccessorGroup) PopulatePlayer(playerID int, age int, nameID
 		return Player{}, err
 	}
 
+	team, err := accessorGroup.GetTeamMetaByID(teamID)
+	if err != nil {
+		return Player{}, err
+	}
+
 	player := Player{}
 	player.ID = playerID
 	player.Age = age
 	player.Name = name
+	player.Team = team
 	player.Position = position
 
 	return player, nil
@@ -31,12 +38,12 @@ func (accessorGroup *AccessorGroup) PopulatePlayer(playerID int, age int, nameID
 // GetPlayerByID returns a player from the database by playerID
 func (accessorGroup *AccessorGroup) GetPlayerByID(ID int) (Player, error) {
 	player := &Player{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM Players WHERE ID=?", ID).Scan(&player.ID, &player.Age, &player.Name.ID, &player.Position.ID)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Players WHERE ID=?", ID).Scan(&player.ID, &player.Age, &player.Name.ID, &player.Team.ID, &player.Position.ID)
 	if err != nil {
 		return Player{}, err
 	}
 
-	*player, err = accessorGroup.PopulatePlayer(player.ID, player.Age, player.Name.ID, player.Position.ID)
+	*player, err = accessorGroup.PopulatePlayer(player.ID, player.Age, player.Name.ID, player.Team.ID, player.Position.ID)
 	if err != nil {
 		return Player{}, err
 	}
@@ -53,12 +60,12 @@ func (accessorGroup *AccessorGroup) GetPlayerByName(firstName string, middleName
 		return Player{}, err
 	}
 
-	err = accessorGroup.Database.QueryRow("SELECT * FROM Players WHERE nameID=?", name.ID).Scan(&player.ID, &player.Age, &player.Name.ID, &player.Position.ID)
+	err = accessorGroup.Database.QueryRow("SELECT * FROM Players WHERE nameID=?", name.ID).Scan(&player.ID, &player.Age, &player.Name.ID, &player.Team.ID, &player.Position.ID)
 	if err != nil {
 		return Player{}, err
 	}
 
-	*player, err = accessorGroup.PopulatePlayer(player.ID, player.Age, player.Name.ID, player.Position.ID)
+	*player, err = accessorGroup.PopulatePlayer(player.ID, player.Age, player.Name.ID, player.Team.ID, player.Position.ID)
 	if err != nil {
 		return Player{}, err
 	}
@@ -77,12 +84,39 @@ func (accessorGroup *AccessorGroup) GetAllPlayers() ([]Player, error) {
 
 	for rows.Next() {
 		var newPlayer = Player{}
-		err = rows.Scan(&newPlayer.ID, &newPlayer.Age, &newPlayer.Name.ID, &newPlayer.Position.ID)
+		err = rows.Scan(&newPlayer.ID, &newPlayer.Age, &newPlayer.Name.ID, &newPlayer.Team.ID, &newPlayer.Position.ID)
 		if err != nil {
 			return []Player{}, err
 		}
 
-		newPlayer, err = accessorGroup.PopulatePlayer(newPlayer.ID, newPlayer.Age, newPlayer.Name.ID, newPlayer.Position.ID)
+		newPlayer, err = accessorGroup.PopulatePlayer(newPlayer.ID, newPlayer.Age, newPlayer.Name.ID, newPlayer.Team.ID, newPlayer.Position.ID)
+		if err != nil {
+			return []Player{}, err
+		}
+
+		players = append(players, newPlayer)
+	}
+
+	return players, nil
+}
+
+// GetAllPlayersByTeamID gets all players from the database by Team ID
+func (accessorGroup *AccessorGroup) GetAllPlayersByTeamID(teamID int) ([]Player, error) {
+	rows, err := accessorGroup.Database.Query("SELECT * FROM Players WHERE teamID=?", teamID)
+	if err != nil {
+		return []Player{}, err
+	}
+
+	var players []Player
+
+	for rows.Next() {
+		var newPlayer = Player{}
+		err = rows.Scan(&newPlayer.ID, &newPlayer.Age, &newPlayer.Name.ID, &newPlayer.Team.ID, &newPlayer.Position.ID)
+		if err != nil {
+			return []Player{}, err
+		}
+
+		newPlayer, err = accessorGroup.PopulatePlayer(newPlayer.ID, newPlayer.Age, newPlayer.Name.ID, newPlayer.Team.ID, newPlayer.Position.ID)
 		if err != nil {
 			return []Player{}, err
 		}
