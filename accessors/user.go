@@ -50,10 +50,10 @@ func (accessorGroup *AccessorGroup) GetUserByID(ID int) (User, error) {
 }
 
 // GetUserByName returns a user from the database by userID
-func (accessorGroup *AccessorGroup) GetUserByName(firstName string, middleName string, lastName string) (User, error) {
+func (accessorGroup *AccessorGroup) GetUserByName(firstName string, lastName string) (User, error) {
 	user := &User{}
 
-	name, err := accessorGroup.GetNameByName(firstName, middleName, lastName)
+	name, err := accessorGroup.GetNameByName(firstName, lastName)
 	if err != nil {
 		return User{}, err
 	}
@@ -125,7 +125,7 @@ func (accessorGroup *AccessorGroup) MakeUser(user User) (User, error) {
 		return User{}, err
 	}
 
-	user, err = accessorGroup.GetUserByName(name.FirstName, name.MiddleName, name.LastName)
+	user, err = accessorGroup.GetUserByName(name.FirstName, name.LastName)
 	if err != nil {
 		return User{}, err
 	}

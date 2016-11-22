@@ -1,5 +1,12 @@
 package accessors
 
+import (
+	"math/rand"
+	"time"
+
+	"github.com/jessemillar/american-dream-league/helpers"
+)
+
 type Player struct {
 	ID       int      `json:"id"`
 	Age      int      `json:"age"`
@@ -52,10 +59,10 @@ func (accessorGroup *AccessorGroup) GetPlayerByID(ID int) (Player, error) {
 }
 
 // GetPlayerByName returns a player from the database by playerID
-func (accessorGroup *AccessorGroup) GetPlayerByName(firstName string, middleName string, lastName string) (Player, error) {
+func (accessorGroup *AccessorGroup) GetPlayerByName(firstName string, lastName string) (Player, error) {
 	player := &Player{}
 
-	name, err := accessorGroup.GetNameByName(firstName, middleName, lastName)
+	name, err := accessorGroup.GetNameByName(firstName, lastName)
 	if err != nil {
 		return Player{}, err
 	}
@@ -154,12 +161,39 @@ func (accessorGroup *AccessorGroup) MakePlayer(player Player) (Player, error) {
 		return Player{}, err
 	}
 
-	player, err = accessorGroup.GetPlayerByName(name.FirstName, name.MiddleName, name.LastName)
+	player, err = accessorGroup.GetPlayerByName(name.FirstName, name.LastName)
 	if err != nil {
 		return Player{}, err
 	}
 
 	return player, nil
+}
+
+// GeneratePlayers makes a specified number of random players and inserts them in the database
+func (accessorGroup *AccessorGroup) GeneratePlayers(count int) error {
+	for i := 0; i < count; i++ {
+		person, err := helpers.GetPerson()
+		if err != nil {
+			return err
+		}
+
+		name, err := accessorGroup.MakeName(Name{FirstName: person.Name, LastName: person.Surname})
+		if err != nil {
+			return err
+		}
+
+		rando := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+		// Generate a random age between 20 and 40
+		// There are currently 7 positions that the database prepopulates with
+		// Assign all new players to the "Draft" team
+		_, err = accessorGroup.Database.Query("INSERT INTO Players (age, nameID, teamID, positionID) VALUES (?,?,?,?)", rando.Intn(40-20)+20, name.ID, 1, rando.Intn(7-1)+1)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 // DeletePlayerByID deletes a player from the database

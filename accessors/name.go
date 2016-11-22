@@ -1,16 +1,15 @@
 package accessors
 
 type Name struct {
-	ID         int    `json:"id"`
-	FirstName  string `json:"firstName"`
-	MiddleName string `json:"middleName"`
-	LastName   string `json:"lastName"`
+	ID        int    `json:"id"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
 }
 
 // GetNameByID returns a name from the database by nameID
 func (accessorGroup *AccessorGroup) GetNameByID(ID int) (Name, error) {
 	name := &Name{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM Names WHERE ID=?", ID).Scan(&name.ID, &name.FirstName, &name.MiddleName, &name.LastName)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Names WHERE ID=?", ID).Scan(&name.ID, &name.FirstName, &name.LastName)
 	if err != nil {
 		return Name{}, err
 	}
@@ -19,9 +18,9 @@ func (accessorGroup *AccessorGroup) GetNameByID(ID int) (Name, error) {
 }
 
 // GetNameByName returns a name from the database by nameID
-func (accessorGroup *AccessorGroup) GetNameByName(firstName string, middleName string, lastName string) (Name, error) {
+func (accessorGroup *AccessorGroup) GetNameByName(firstName string, lastName string) (Name, error) {
 	name := &Name{}
-	err := accessorGroup.Database.QueryRow("SELECT * FROM Names WHERE firstName=? AND middleName=? AND lastName=?", firstName, middleName, lastName).Scan(&name.ID, &name.FirstName, &name.MiddleName, &name.LastName)
+	err := accessorGroup.Database.QueryRow("SELECT * FROM Names WHERE firstName=? AND lastName=?", firstName, lastName).Scan(&name.ID, &name.FirstName, &name.LastName)
 	if err != nil {
 		return Name{}, err
 	}
@@ -40,7 +39,7 @@ func (accessorGroup *AccessorGroup) GetAllNames() ([]Name, error) {
 
 	for rows.Next() {
 		var newName = Name{}
-		err = rows.Scan(&newName.ID, &newName.FirstName, &newName.MiddleName, &newName.LastName)
+		err = rows.Scan(&newName.ID, &newName.FirstName, &newName.LastName)
 		if err != nil {
 			return []Name{}, err
 		}
@@ -53,7 +52,7 @@ func (accessorGroup *AccessorGroup) GetAllNames() ([]Name, error) {
 
 // UpdateName adds a name to the database
 func (accessorGroup *AccessorGroup) UpdateName(name Name) (Name, error) {
-	_, err := accessorGroup.Database.Query("UPDATE Names SET firstName=?, middleName=?, lastName=? WHERE ID=?", name.FirstName, name.MiddleName, name.LastName, name.ID)
+	_, err := accessorGroup.Database.Query("UPDATE Names SET firstName=?, lastName=? WHERE ID=?", name.FirstName, name.LastName, name.ID)
 	if err != nil {
 		return Name{}, err
 	}
@@ -68,12 +67,12 @@ func (accessorGroup *AccessorGroup) UpdateName(name Name) (Name, error) {
 
 // MakeName adds a name to the database
 func (accessorGroup *AccessorGroup) MakeName(name Name) (Name, error) {
-	_, err := accessorGroup.Database.Query("INSERT INTO Names (firstName, middleName, lastName) VALUES (?,?,?)", name.FirstName, name.MiddleName, name.LastName)
+	_, err := accessorGroup.Database.Query("INSERT INTO Names (firstName, lastName) VALUES (?,?)", name.FirstName, name.LastName)
 	if err != nil {
 		return Name{}, err
 	}
 
-	name, err = accessorGroup.GetNameByName(name.FirstName, name.MiddleName, name.LastName)
+	name, err = accessorGroup.GetNameByName(name.FirstName, name.LastName)
 	if err != nil {
 		return Name{}, err
 	}

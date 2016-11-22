@@ -76,6 +76,21 @@ func (handlerGroup *HandlerGroup) MakePlayer(context echo.Context) error {
 	return context.JSON(http.StatusOK, response)
 }
 
+func (handlerGroup *HandlerGroup) GeneratePlayers(context echo.Context) error {
+	count, err := strconv.Atoi(context.Param("count"))
+	if err != nil {
+		return err
+	}
+
+	err = handlerGroup.Accessors.GeneratePlayers(count)
+	if err != nil {
+		return context.String(http.StatusBadRequest, err.Error())
+	}
+
+	jsonresp.New(context.Response(), http.StatusOK, "Successfully generated "+context.Param("count")+" players")
+	return nil
+}
+
 func (handlerGroup *HandlerGroup) DeletePlayerByID(context echo.Context) error {
 	ID, err := strconv.Atoi(context.Param("id"))
 	if err != nil {

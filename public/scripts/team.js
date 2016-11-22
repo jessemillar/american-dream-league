@@ -41,7 +41,7 @@ function populatePlayers(players) {
 		var age = document.createElement("td");
 		var position = document.createElement("td");
 
-		name.appendChild(document.createTextNode(players[i].name.firstName + " " + players[i].name.middleName + " " + players[i].name.lastName));
+		name.appendChild(document.createTextNode(players[i].name.firstName + " " + players[i].name.lastName));
 		age.appendChild(document.createTextNode(players[i].age + "yrs"));
 		position.appendChild(document.createTextNode(players[i].position.name));
 
