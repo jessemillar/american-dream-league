@@ -5,7 +5,7 @@ function init() {
 		var page = window.location.hash.substr(1);
 		setCurrentPage(page);
 	} else {
-		setCurrentPage("leagues");
+		setCurrentPage("login");
 	}
 
     getTeams(populateTeams);
