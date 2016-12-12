@@ -1,0 +1,383 @@
+commit a9e8324be87d663f0f6d90983767ea6fa2615a60
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 21 22:13:28 2016 -0700
+
+    Simple, not functioning login page
+
+commit b581b850e3ddb61f6254b1b8d0cfb57beb394d3c
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 21 21:50:25 2016 -0700
+
+    Random player generate via endpoint works
+
+commit f9319d033cfe622065f4c0943d8f884a649ba1fe
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 21 20:46:11 2016 -0700
+
+    Working SQL game generation triggers
+
+commit b8c2928d1f936e7c2b45397cc52695793ebb70ce
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 21 19:40:39 2016 -0700
+
+    Simple UI
+
+commit 8068b2b7814030bced2805ead400225fc14ed1ab
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 21 12:45:39 2016 -0700
+
+    Getting players on a team works
+
+commit 80508fbe9b8e90118ef9fe6146ee38a806029486
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 21 12:09:20 2016 -0700
+
+    Teams work on a low level
+
+commit 6835b2419e2494411215adab99a67278f1ee69f7
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 21 11:40:26 2016 -0700
+
+    Beginning player creation and management
+
+commit 828fde423e4f53c8ee3b0352604f7974e3d2d773
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 21 10:04:39 2016 -0700
+
+    Vendoring dependencies
+
+commit 7e4e43eb13680933b3008dde6f6ea026275937ca
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Fri Nov 18 17:02:43 2016 -0700
+
+    Working with the library rewrites; still need to vendor
+
+commit 5e646c26e050e615fbf3e17f33d3e4ef802d641c
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Fri Nov 18 16:56:07 2016 -0700
+
+    Moving to Echo v3
+
+commit 16cbfe7eef19654fb44775197e47bfb26f5a2f11
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Fri Nov 18 11:06:45 2016 -0700
+
+    User management works
+
+commit e0fe95271eb57f58628caf5d6c237863777c0fb8
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Fri Nov 18 09:55:49 2016 -0700
+
+    Simple passwords can be added to the database
+
+commit 099eb59456d869d9d12a567d1e4b7cfe9252ddad
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Fri Nov 18 09:48:50 2016 -0700
+
+    Added emails and users
+
+commit af14789a34f9b4a56a8a682ab96d7e0fa6570d32
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Fri Nov 18 08:08:46 2016 -0700
+
+    Organization
+
+commit ab0f12c4550e8983b97bd50d00e89e8b8a464ae1
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Thu Nov 17 20:41:54 2016 -0700
+
+    Deleting works
+
+commit 73da4cc186c6e1ddaf2d5efead9c86dddd6a98aa
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Thu Nov 17 20:12:40 2016 -0700
+
+    League PUT works
+
+commit e2503950a76eec6af0d1708a172ac7ba5fdfc5ae
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Thu Nov 17 19:44:03 2016 -0700
+
+    Working GET and POST on Leagues
+
+commit c3d923773a91151dc61f1e8520d93a7d96cb68c9
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Thu Nov 17 19:05:34 2016 -0700
+
+    Working database file
+
+commit 7b56aef12cbeac1ed4a2e11297e715de999ca3a2
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Thu Nov 17 14:20:23 2016 -0700
+
+    Simplifying Circle
+
+commit b7ed0ed4f7e1a3e1e5c39934426a74b951af9bbd
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Thu Nov 17 14:16:05 2016 -0700
+
+    Fixing templates and versioning stuff with gvt
+
+commit d6a87a6b7780ef1208f0794ad19d789f803d76a7
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 14 19:54:04 2016 -0700
+
+    Fixing foreign key and compile errors
+
+commit 95a5265cc7b0072c32b8895d7234f615797ad6ed
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 14 14:45:28 2016 -0700
+
+    Fiddling with new accessors and database schema changes
+
+commit cb5aa0e9ddfa738880e7d3e389160ac39570282a
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 14 14:12:24 2016 -0700
+
+    Adding some UI stuff
+
+commit a44aae9868021fe7db979dc1af028972b026b7af
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 14 09:21:56 2016 -0700
+
+    Fixing a views issue
+
+commit 1072b2bcca9de0226207e04fafbc838ad846d718
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Nov 14 09:05:48 2016 -0700
+
+    Fixing a small YAML issue
+
+commit 5441cdab68949e37c1b9f3473b23feda6857e703
+Author: Jesse Millar <jessemillar@Alice.app.byu.edu>
+Date:   Mon Nov 14 08:56:44 2016 -0700
+
+    Trying to fix Circle
+
+commit 575e9b3c4158d6cb9797607cfd12ad1c200cf197
+Author: Jesse Millar <jessemillar@Alice.app.byu.edu>
+Date:   Mon Nov 14 08:55:30 2016 -0700
+
+    Trying to fix Circle builds
+
+commit d4803a684cf26b200dae40cbd367da3ff4c119e1
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Sun Nov 13 18:18:41 2016 -0700
+
+    Update Algorithm.txt
+
+commit 5838a3eb52dd58b51921d78b15a0ae3c9791b87e
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Sun Nov 13 18:16:51 2016 -0700
+
+    Update Algorithm.txt
+
+commit 0253000b864b180389ab6cd45c15bacd72b83027
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Sun Nov 13 18:15:08 2016 -0700
+
+    Update Algorithm.txt
+
+commit cc2a94cbbc6ce4ed0f43fa569d5830c0aa297196
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Fri Nov 11 19:16:42 2016 -0700
+
+    Adding a minimal frontend scaffold with proper routing
+
+commit 224e24c080e8a9375d8aed661291ee3d3161476e
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Fri Nov 11 17:02:28 2016 -0700
+
+    Fixing some SQL syntax errors
+
+commit c1806f735e779e55b6af21087c7fbde0197bfc5a
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Thu Nov 10 21:38:45 2016 -0700
+
+    Fixing ports exposed
+
+commit f34f41ce0476c655df0b9fcae2e4fa01303d385e
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Thu Nov 10 20:50:43 2016 -0700
+
+    Adding player generation and enabling test deployment
+
+commit b594a8e016d11872659c47a34fcdfb765b51e254
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Thu Nov 10 20:35:58 2016 -0700
+
+    Working hitter generation
+
+commit 31ca3de37030365a7d4c50e560696f9b14257bb6
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Thu Nov 10 20:01:45 2016 -0700
+
+    Adding the start of a player generator
+
+commit f3e1f44fb574d4812e40b699a9246a406f3dae60
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Wed Nov 9 15:09:33 2016 -0700
+
+    Moving the UI screenshot
+
+commit 68fb0eaee9e265b4a08868a9b473e519284321cc
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Wed Nov 9 15:07:57 2016 -0700
+
+    Algoriithm for stats
+
+commit 6e02293d2bf9d1363219e551d1a914f906245533
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Wed Nov 9 14:55:50 2016 -0700
+
+    Add files via upload
+
+commit ddda6851f42ac34adc2b262e6c9d126fc137b11d
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Wed Nov 9 14:14:39 2016 -0700
+
+    Update database.sql
+
+commit 1aa36ed6f5c934aa4a834b676efe4dad5cd7a653
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Wed Nov 9 13:54:53 2016 -0700
+
+    Update database.sql
+
+commit c3984ae80baebc2b80027346a6761f2f48c7b114
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Wed Nov 9 11:57:06 2016 -0700
+
+    Update database.sql
+
+commit 32a2ed333435706b43874d10f7e53d3cb0ebb8c7
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Wed Nov 9 10:11:31 2016 -0700
+
+    Update database.sql
+
+commit f1de62929d384530747d1df06fcbb5a2a8f84c98
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sun Nov 6 15:03:41 2016 -0700
+
+    Adding a bit more information to the README
+
+commit 9af88a402752ade699272a8b5331c6c69a78d4e1
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sun Nov 6 14:58:58 2016 -0700
+
+    Theoretically-working scaffolding
+
+commit 7225296636653146dc47bb56fdd5264e3d6d0f19
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sun Nov 6 14:24:25 2016 -0700
+
+    Adding some initial accessors
+
+commit bc23168b332eb1b375292ed6a51123c83369c8a0
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sun Nov 6 13:47:25 2016 -0700
+
+    Cleanup and a start on database schemas
+
+commit e0683cbf7e7e8b95e13c03be2d634e4fb2daa24d
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sun Nov 6 13:39:24 2016 -0700
+
+    Finally got the database container working
+
+commit f27100c11a6b55f57dd64b17d87aaf540a3ebd3b
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sun Nov 6 10:03:38 2016 -0700
+
+    Simplifying Circle to only push to Docker Hub
+
+commit 97f01d9c4e3e143dc3a586c4ad8fc3137b02cefa
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sun Nov 6 09:30:26 2016 -0700
+
+    Adding more deploy pipeline files
+
+commit b4dd30f22f96ca13f7d27afedab6b07475aef0a7
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sat Nov 5 20:02:32 2016 -0600
+
+    Trying to get MySQL to import a dump
+
+commit 3fc312f79d1cc974982c00b80fa81e84a2852235
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sat Nov 5 19:25:17 2016 -0600
+
+    Initial Go files
+
+commit ad074667aed63e6e681a685a9e63030a6fd4b844
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Mon Oct 24 14:08:23 2016 -0600
+
+    A few notes on the requirements for the final presentation
+
+commit c61530271e2c7d168e948faca9718c426d267371
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Fri Oct 21 22:16:44 2016 -0600
+
+    Project plan document added
+
+commit d3c98b9bd8d5402620491e62c4754f976f147206
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Wed Sep 28 20:09:36 2016 -0600
+
+    Potentially finishing the write-up
+
+commit 0e5dc0ff70f0b7248eb8f77ae01468414ed34f10
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Wed Sep 28 19:46:57 2016 -0600
+
+    Diagram is done
+
+commit 69600fed0a89a4b2425f64f841d8e2da3a5e1a07
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Wed Sep 28 19:37:07 2016 -0600
+
+    Organizing and adding user information
+
+commit 70924f2376e233c19447ed8233a673736d1c1c49
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Wed Sep 28 18:57:13 2016 -0600
+
+    Add files via upload
+
+commit a6b91f979bfbc1f546d0cccd47aeb6a72ebf23c1
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Wed Sep 28 15:40:19 2016 -0600
+
+    Adding the start of some documentation
+
+commit 783aaf34f61ad390227eb0a54b0ea968c44345eb
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Wed Sep 28 14:59:44 2016 -0600
+
+    Update formulas.md
+
+commit a328d5b2362e4bad239479644c58424fdffe7809
+Author: dillhill51 <hamiltonhuskie5@aol.com>
+Date:   Mon Sep 26 15:00:34 2016 -0600
+
+    Add files via upload
+
+commit 539991cfa5014b43e0339355e476a29fa64bc9c3
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sun Sep 25 15:56:57 2016 -0600
+
+    Adding some formulas
+
+commit 6f3edd1456dd164d03bd22c14f0f05bdadb8447a
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sun Sep 25 15:48:11 2016 -0600
+
+    Initial commit
+
+commit 4218327694f6e35155bb1d830a6b9e63c31213e1
+Author: Jesse Millar <hellojessemillar@gmail.com>
+Date:   Sun Sep 25 14:34:19 2016 -0600
+
+    Initial commit
